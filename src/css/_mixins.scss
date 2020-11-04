@@ -4,7 +4,7 @@
   padding: 0px;
   margin: 0px;
 }
-@mixin header-style($display, $width, $height, $margin, $background) {
+@mixin section-style($display, $width, $height, $margin, $background) {
   display: $display;
   align-items: center;
   width: $width;
