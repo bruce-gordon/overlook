@@ -73,6 +73,19 @@ describe.only('BookingRepo', () => {
   })
 
   it('should find the total number of available rooms', () => {
-      expect(bookingRepo.findNumberOfAvailableRooms("2020/02/14")).to.equal(7)
+    expect(bookingRepo.findNumberOfAvailableRooms("2020/02/14")).to.equal(7)
+  })
+
+  it('should search for a list of available rooms on a given date', () => {
+    expect(bookingRepo.searchAvailableRoomsByDate("2020/02/14")).to.deep.equal([
+      {"number":1,"roomType":"residential suite","bidet":true,"bedSize":"queen","numBeds":1,"costPerNight":358.4},
+      {"number":2,"roomType":"suite","bidet":false,"bedSize":"full","numBeds":2,"costPerNight":477.38},
+      {"number":4,"roomType":"single room","bidet":false,"bedSize":"queen","numBeds":1,"costPerNight":429.44},
+      {"number":5,"roomType":"single room","bidet":true,"bedSize":"queen","numBeds":2,"costPerNight":340.17},
+      {"number":7,"roomType":"single room","bidet":false,"bedSize":"queen","numBeds":2,"costPerNight":231.46},
+      {"number":8,"roomType":"junior suite","bidet":false,"bedSize":"king","numBeds":1,"costPerNight":261.26},
+      {"number":9,"roomType":"single room","bidet":true,"bedSize":"queen","numBeds":1,"costPerNight":200.39}
+    ]);
+    expect(bookingRepo.searchAvailableRoomsByDate("2020/02/14").length).to.equal(7);
   })
 });

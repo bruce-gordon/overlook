@@ -44,4 +44,16 @@ export default class BookingRepo {
     }, []);
     return this.addRates(money);
   }
+
+  searchAvailableRoomsByDate(date) {
+    let occupied = this.findBookingsByDate(date);
+    let takenRooms = occupied.map(booking => booking.roomNumber);
+    let openRooms = this.rooms.reduce((available, room) => {
+      if (!takenRooms.includes(room.number)) {
+        available.push(room);
+      }
+      return available;
+    },[]);
+    return openRooms;
+  }
 }
