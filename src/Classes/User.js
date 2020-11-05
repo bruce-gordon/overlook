@@ -2,15 +2,17 @@ export default class User {
   constructor(data, bookings, rooms) {
     this.id = data.id;
     this.name = data.name;
-    this.bookings = this.getBookings(bookings);
+    this.bookings = this.getUserBookings(bookings);
     this.moneySpent = this.calculateMoneySpent(rooms);
-    this.username = `customer${this.id}`;
-    this.password = 'overlook2020';
   }
 
-  getBookings(data) {
+  getUserBookings(data) {
     let results = data.filter(booking => this.id === booking.userID);
     return results;
+  }
+
+  updateUserBookings(bookingsData) {
+    this.bookings = this.getUserBookings(bookingsData);
   }
 
   calculateMoneySpent(data) {
@@ -32,8 +34,12 @@ export default class User {
     })
     return charges;
   }
-  //
-  // bookRoom(userID, date, roomNumber) {
-  //
-  // }
+
+  bookRoom(date, roomNumber) {
+    return {
+      "userID": this.id,
+      "date": date,
+      "roomNumber": roomNumber
+    }
+  }
 }
