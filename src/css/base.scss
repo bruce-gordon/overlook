@@ -152,7 +152,6 @@ header {
   @include body-styling($primary-white, .2vw, .5vw 0 0 0)
   @include font($main-font, 1.5vw, 400, $blue);
   background-color: $primary-white;
-  margin-top: .5vw;
   padding: .2vw;
 }
 
@@ -168,6 +167,27 @@ header {
   @include font($main-font, 1.75vw, 200, $primary-white);
   padding: 3vw;
   border-radius: 2vw;
+}
+
+// ********* Manager Dashboard ********* //
+.manager-dash {
+  @include section-style(flex, 100%, 40vw, 2vw 0, $primary-white);
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.manager-info {
+  @include section-style(normal, 25%, auto, 0, $green);
+  @include font($main-font, 2.75vw, 200, $primary-white);
+  padding: 3vw;
+  border-radius: 2vw;
+}
+
+.manager-data {
+  @include font($main-font, 4vw, 400, $primary-white);
+  text-align: center;
+  margin-top: .5vw;
+  border: 2px solid $gray;
 }
 
 // ********* Class Change ********* //
