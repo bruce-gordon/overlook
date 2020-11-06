@@ -72,7 +72,7 @@ header {
 }
 
 #welcome {
-  @include font($secondary-font, 2vw, 200, $primary-white);
+  @include font($secondary-font, 2.25vw, 200, $primary-white);
   padding: 1vw .8vw;
   font-weight: 200;
 }
@@ -165,10 +165,9 @@ header {
 
 .customer-info {
   @include section-style(normal, 90%, auto, 0, $green);
-  @include font($main-font, 2vw, 400, $primary-white);
+  @include font($main-font, 1.75vw, 200, $primary-white);
   padding: 3vw;
   border-radius: 2vw;
-
 }
 
 // ********* Class Change ********* //
