@@ -18,24 +18,22 @@
         <button id="search-customers-button" type="button" name="search-customer"></button>
       </div>
     </header>
-    <div id="user-bar hide">
+    <div class="user-bar ">
       <h2 id="welcome">Welcome, User</h2>
-      <div class="room-search hide">
+      <div class="room-search">
         <div class="room-type-inputs">
-          <label for="room-type-dropdown">Select Room</label>
-          <form class="room-type-dropdown" action="index.html" method="post">
-            <select name="rooms" id="rooms">
-              <option value="null"></option>
-              <option value="residential-suite">Residential Suite</option>
-              <option value="suite">Suite</option>
-              <option value="junior-suite">Junior Suite</option>
-              <option value="single-room">Single Room</option>
-            </select>
-          </form>
+          <label class="room-input-label" for="room-type-dropdown">Select Room</label>
+          <select class="room-input" name="rooms" id="rooms">
+            <option value="null"></option>
+            <option value="residential-suite">Residential Suite</option>
+            <option value="suite">Suite</option>
+            <option value="junior-suite">Junior Suite</option>
+            <option value="single-room">Single Room</option>
+          </select>
         </div>
         <div class="date-selector">
-          <label id="date-label" for="date-input">Select Date</label>
-          <input id="date-input" type="date" name="date" value="">
+          <label class="room-input-label" for="date-input">Select Date</label>
+          <input class="room-input" id="date-input" type="date" name="date" value="">
         </div>
         <button id="search-rooms-button" type="button" name="search-rooms">Search Rooms</button>
       </div>
@@ -46,10 +44,13 @@
           <label for="username">User Name</label>
           <input class="login-input" type="text" name="username">
           <label for="password">Password</label>
-          <input class="login-input" type="text" name="password">
-          <p class="login-error hide">Username or Password is incorrect.  Please try again.</p>
+          <input class="login-input" type="password" name="password">
           <button class="login-button" type="button" name="login">Log In</button>
         </article>
+        <p class="login-error hide">Username or Password is incorrect.  Please try again.</p>
+      </section>
+      <section class="customer-dash">
+
       </section>
     </main>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->

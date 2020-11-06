@@ -1,9 +1,10 @@
-@mixin body-styling() {
+@mixin body-styling($color, $pad, $margin) {
   background: $primary-white;
   font-family: $main-font;
   padding: 0px;
   margin: 0px;
 }
+
 @mixin section-style($display, $width, $height, $margin, $background) {
   display: $display;
   align-items: center;
@@ -19,8 +20,16 @@
   font-weight: $weight;
   color: $color;
 }
+
 @mixin icon-style($image, $color) {
   background-image: $image;
   background-size: contain;
   background-color: $color;
+}
+
+@mixin hover($background, $color) {
+  cursor: pointer;
+  background-color: $background;
+  color: $color;
+  border: 1px solid $primary-white;
 }
