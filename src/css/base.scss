@@ -4,7 +4,7 @@
 * {
   padding: 0px;
   margin: 0px;
-  border: 1px solid $blue;
+  border: none;
 }
 
 body {
@@ -67,7 +67,7 @@ header {
 
 // ********* Welcome Bar ********* //
 .user-bar {
-  @include section-style(flex, auto, 8vw, 0px, $gray);
+  @include section-style(flex, auto, 6vw, 0px, $gray);
   justify-content:space-between;
 }
 
@@ -94,32 +94,24 @@ header {
   justify-content: flex-start;
 }
 
-// #rooms {
-//   width: 100%;
-//   height: 2.5vw;
-// }
-
 .room-input-label {
-  @include font($main-font, normal, normal, $primary-white);
+  @include font($secondary-font, 1.5vw, 200, $primary-white);
   width: 100%;
+  padding-top: .5vw;
   display: flex;
   justify-content: center;
 }
 
 .room-input {
   @include section-style(normal, 90%, 30%, 0, normal);
-  padding: 0;
+  padding-left: .5vw;
 }
-// #date-input {
-//   width: 80%;
-//   height: 2.4vw;
-// }
 
 #search-rooms-button {
-  font-size: 1.5vw;
-  height: 70%;
+  @include font($secondary-font, 1.5vw, 400, $gray);
+  height: 60%;
   padding: .5vw;
-  margin-right: .5vw;
+  margin-right: 1vw;
   &:hover {
     @include hover($blue, $primary-white)
   }
@@ -157,13 +149,27 @@ header {
 }
 
 .login-error {
-  @include font($main-font, 1.5vw, 400, $blue);
   @include body-styling($primary-white, .2vw, .5vw 0 0 0)
+  @include font($main-font, 1.5vw, 400, $blue);
   background-color: $primary-white;
   margin-top: .5vw;
   padding: .2vw;
 }
 
+// ********* Customer Dashboard ********* //
+.customer-dash {
+  @include section-style(flex, 100%, 40vw, 0, $primary-white);
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.customer-info {
+  @include section-style(normal, 90%, auto, 0, $green);
+  @include font($main-font, 2vw, 400, $primary-white);
+  padding: 3vw;
+  border-radius: 2vw;
+
+}
 
 // ********* Class Change ********* //
 .hide {
