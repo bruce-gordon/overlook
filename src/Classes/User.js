@@ -6,8 +6,8 @@ export default class User {
     this.moneySpent = this.calculateMoneySpent(rooms);
   }
 
-  getUserBookings(data) {
-    let results = data.filter(booking => this.id === booking.userID);
+  getUserBookings(bookingsData) {
+    let results = bookingsData.filter(booking => this.id === booking.userID);
     return results;
   }
 
