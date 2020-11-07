@@ -25,6 +25,7 @@
   background-image: $image;
   background-size: contain;
   background-color: $color;
+  background-repeat: no-repeat;
 }
 
 @mixin hover($background, $color) {

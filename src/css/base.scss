@@ -5,7 +5,7 @@
   padding: 0px;
   margin: 0px;
   // border: 1px solid $blue;
-  // border: none;
+  border: none;
 }
 
 body {
@@ -14,9 +14,10 @@ body {
 
 // ********* HEADER ********* //
 header {
-  @include section-style(flex, auto, 7vw, 0px, $green);
+  @include section-style(flex, auto, 7.5vw, 0px, $green);
   justify-content: space-between;
   padding: 0 1vw 0 1vw;
+  border-bottom: 1px solid $gray;
 }
 
 .hotel-name {
@@ -42,18 +43,33 @@ header {
 .hotel-icon {
   @include section-style(flex, 5.4vw, $icon-size, .5vw, $green)
   @include icon-style(url(../images/hotel.svg), $green);
+
 }
 
 // ********* Welcome Bar ********* //
 .user-bar {
-  @include section-style(flex, auto, 6vw, 0px, $gray);
+  @include section-style(flex, auto, 7vw, 0px, $gray);
   justify-content:space-between;
+}
+
+.welcome-and-back {
+display: flex;
+align-items: center;
 }
 
 #welcome {
   @include font($secondary-font, 2.25vw, 200, $primary-white);
   padding: 1vw .8vw;
+  margin-right: 5px;
   font-weight: 200;
+}
+
+.back-button {
+  @include icon-style(url(../images/left-arrow-in-circular-button-black-symbol.svg), $gray);
+  @include section-style(flex, 6.9vh, 7vh, 0px, $gray);
+  &:hover {
+    @include icon-style(url(../images/left-arrow-in-circular-button-blue-symbol.svg), normal)
+  }
 }
 
 .room-search {
@@ -82,8 +98,9 @@ header {
 }
 
 .room-input {
-  @include section-style(normal, 90%, 30%, 0, normal);
-  padding-left: .5vw;
+  @include section-style(normal, 90%, 35%, 0, normal);
+  @include font($main-font, 1.25vw, 400, $gray);
+  padding: .1vw 0 .1vw .5vw;
 }
 
 #search-rooms-button {
@@ -193,6 +210,7 @@ header {
 // ********* Search Results ********* //
 h4 {
   @include section-style(normal, 100%, auto, 1vw 0, $primary-white);
+  @include font($secondary-font, 2vw, 400, $gray);
   text-align: center;
 }
 
