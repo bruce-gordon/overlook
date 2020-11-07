@@ -4,11 +4,12 @@
 * {
   padding: 0px;
   margin: 0px;
-  border: none;
+  // border: 1px solid $blue;
+  // border: none;
 }
 
 body {
-  @include body-styling();
+  @include body-styling($primary-white, 0, 0);
 }
 
 // ********* HEADER ********* //
@@ -43,36 +44,14 @@ header {
   @include icon-style(url(../images/hotel.svg), $green);
 }
 
-.search-customers {
-  @include section-style(flex, 25vw, 45%, 0px, $green)
-  justify-content: space-between;
-}
-
-#customer-field {
-  @include section-style(flex, 20vw, 100%, 0px, auto)
-  @include font($main-font, 1.2vw, 200, $gray);
-  padding-left: 1vw;
-
-}
-
-#search-customers-button {
-  @include section-style(flex, 3.1vw, 3vw, 0 1vw 0 1vw, $green)
-  @include icon-style(url(../images/loupe.svg), $green);
-  border: none;
-  padding: 1vw;
-  &:hover {
-    @include section-style(flex, 3.7vw, 3.5vw, 0 1vw 0 1vw, $green)
-  }
-}
-
 // ********* Welcome Bar ********* //
-#user-bar {
-  @include section-style(flex, auto, 8vw, 0px, $gray);
+.user-bar {
+  @include section-style(flex, auto, 6vw, 0px, $gray);
   justify-content:space-between;
 }
 
 #welcome {
-  @include font($secondary-font, 2vw, 200, $primary-white);
+  @include font($secondary-font, 2.25vw, 200, $primary-white);
   padding: 1vw .8vw;
   font-weight: 200;
 }
@@ -83,92 +62,190 @@ header {
 }
 
 .room-type-inputs {
-  @include section-style(flex, auto, 60%, 0px, $gray);
+  @include section-style(flex, 30%, 100%, 0px, $gray);
   flex-direction: column;
   justify-content: flex-start;
-  color: $primary-white;
 }
 
 .date-selector {
-  @include section-style(flex, auto, 60%, 0px, $gray);
+  @include section-style(flex, 30%, 100%, 0 .5vw 0 .5vw, $gray);
   flex-direction: column;
   justify-content: flex-start;
-  margin: .1vw .5vw 0 .5vw;
-
-  color: $primary-white;
 }
 
-#rooms {
+.room-input-label {
+  @include font($secondary-font, 1.5vw, 200, $primary-white);
   width: 100%;
-  height: 2.3vw;
-}
-
-#date-label {
-  width: 100%;
+  padding-top: .5vw;
   display: flex;
   justify-content: center;
 }
 
-#date-input {
-  width: 100%;
-  height: 2vw;
-  // margin-top: .1vw;
+.room-input {
+  @include section-style(normal, 90%, 30%, 0, normal);
+  padding-left: .5vw;
 }
 
 #search-rooms-button {
-  font-size: 1vw;
-  height: 50%;
+  @include font($secondary-font, 1.5vw, 400, $gray);
+  height: 60%;
   padding: .5vw;
-  margin: .5vw 1vw 0 0;
+  margin-right: 1vw;
   &:hover {
-    cursor: pointer;
-    background-color: $gray;
-    color: $green;
-    border: 1px solid $primary-white;
+    @include hover($blue, $primary-white)
+  }
+}
+
+.search-customers {
+  @include section-style(flex, 25vw, 45%, 0px, $gray);
+  justify-content: space-between;
+}
+
+#customer-field {
+  @include section-style(flex, 20vw, 100%, 0 1vw 0 0, auto);
+  @include font($main-font, 1.2vw, 200, $gray);
+  padding-left: 1vw;
+}
+
+#search-customers-button {
+  @include section-style(flex, 3vw, 2.9vw, 0 1vw 0 1vw, $gray);
+  @include icon-style(url(../images/loupe.svg), $gray);
+  border: none;
+  padding: 1vw;
+  &:hover {
+    @include section-style(flex, 3.5vw, 3.4vw, 0 1vw 0 1vw, $gray);
   }
 }
 
 // ********* Login ********* //
 .login-view {
   @include section-style(flex, auto, 50vw, 0px, $primary-white);
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
 }
 
 .login-box {
-  @include section-style(flex, 30%, auto, 0px, $green);
+  @include section-style(flex, 40%, 40%, 5vw 0 0 0, $green);
   flex-direction: column;
   align-items: flex-start;
   @include font($secondary-font, 2vw, 200, $primary-white);
+  border: 1px solid $gray;
   padding: 2vw;
 }
 
 .login-input {
-  width: 45%;
-  height: 15%;
-  padding: .5vw;
+  @include section-style(normal, 55%, 15%, 1vw 2vw, $primary-white);
+  @include font($main-font, 1.25vw, normal, $gray);
+  padding-left: 1vw;
 }
 
 .login-button {
-  @include section-style(flex, 5vw, 3vw, 0px, $gray);
+  @include section-style(flex, 6vw, 3.5vw, 1vw 0 0 0, $gray);
   @include font($secondary-font, 1.5vw, 200, $primary-white);
-  margin-top: 1vw;
+  justify-content: center;
   padding: 1vw;
+  &:hover {
+    @include hover($blue, $primary-white)
+  }
 }
 
 .login-error {
-  @include font($secondary-font, 1.5vw, 200, $gray);
-  background-color: $primary-white;
-  margin-top: .5vw;
+  @include body-styling($primary-white, .2vw, .5vw 0 0 0)
+  @include font($main-font, 1.5vw, 400, $blue);
+  // background-color: $primary-white;
   padding: .2vw;
 }
 
+// ********* Customer Dashboard ********* //
+.customer-dash {
+  @include section-style(flex, 100%, 40vw, 0, $primary-white);
+  flex-direction: column;
+  justify-content: space-around;
+}
 
+.customer-info {
+  @include section-style(normal, 90%, auto, 0, $green);
+  @include font($main-font, 1.75vw, 200, $primary-white);
+  padding: 3vw;
+  border-radius: 2vw;
+}
 
+// ********* Manager Dashboard ********* //
+.manager-dash {
+  @include section-style(flex, 100%, 40vw, 2vw 0, $primary-white);
+  justify-content: space-around;
+  align-items: flex-start;
+}
 
+.manager-info {
+  @include section-style(normal, 25%, auto, 0, $green);
+  @include font($main-font, 2.75vw, 200, $primary-white);
+  padding: 3vw;
+  border-radius: 2vw;
+}
 
+.manager-data {
+  @include font($main-font, 4vw, 400, $primary-white);
+  @include section-style(normal, auto, auto, .75vw 0 0 0, $blue);
+  text-align: center;
+  border: 2px solid $gray;
+}
 
+// ********* Search Results ********* //
+h4 {
+  @include section-style(normal, 100%, auto, 1vw 0, $primary-white);
+  text-align: center;
+}
 
+.room-results-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-result {
+  @include section-style(flex, 90%, auto, 0, $green);
+  @include font($main-font, 2.25vw, 200, $primary-white);
+  flex-direction: column;
+  padding: 3vw;
+  border-radius: 2vw;
+}
+
+.top-row {
+  @include section-style(flex, 80%, auto, 0, $green);
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.bottom-row {
+  @include section-style(flex, 80%, auto, 0, $green);
+  justify-content: space-between;
+}
+
+.column-left {
+  border-left: 1px solid $gray;
+  padding-left: 1vw;
+  width: 20%;
+}
+
+.column-middle {
+  border-left: 1px solid $gray;
+  padding-left: 1vw;
+  width: 35%;
+}
+
+.column-right {
+  border-left: 1px solid $gray;
+  padding-left: 1vw;
+  width: 30%;
+}
+
+.book-room-button {
+  @include section-style(normal, 80%, 40%, 5px, normal);
+  @include font($main-font, 1.25vw, 200, $gray);
+  &:hover {
+    @include hover($blue, $primary-white);
+  }
+}
 // ********* Class Change ********* //
 .hide {
   display: none;
