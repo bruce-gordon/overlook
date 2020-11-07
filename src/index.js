@@ -1,13 +1,16 @@
 import './css/base.scss';
-import { getUsers, getRooms, getBookings } from './fetch-requests'
+import { getUsers, getRooms, getBookings } from './fetch-requests';
 import User from '../src/Classes/User';
 import Manager from '../src/Classes/Manager';
-import BookingRepo from '../src/Classes/Booking-Repo'
-
+import BookingRepo from '../src/Classes/Booking-Repo';
+import { domMethods } from './DOM-methods';
+import { homeButton } from './DOM-variables';
 let userData;
 let roomsData;
 let bookingsData;
 let user;
+
+
 
 const updateUserData = () => {
   getUsers()
