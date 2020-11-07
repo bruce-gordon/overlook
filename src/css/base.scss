@@ -43,28 +43,6 @@ header {
   @include icon-style(url(../images/hotel.svg), $green);
 }
 
-.search-customers {
-  @include section-style(flex, 25vw, 45%, 0px, $green)
-  justify-content: space-between;
-}
-
-#customer-field {
-  @include section-style(flex, 20vw, 100%, 0px, auto)
-  @include font($main-font, 1.2vw, 200, $gray);
-  padding-left: 1vw;
-
-}
-
-#search-customers-button {
-  @include section-style(flex, 3.1vw, 3vw, 0 1vw 0 1vw, $green)
-  @include icon-style(url(../images/loupe.svg), $green);
-  border: none;
-  padding: 1vw;
-  &:hover {
-    @include section-style(flex, 3.7vw, 3.5vw, 0 1vw 0 1vw, $green)
-  }
-}
-
 // ********* Welcome Bar ********* //
 .user-bar {
   @include section-style(flex, auto, 6vw, 0px, $gray);
@@ -114,6 +92,27 @@ header {
   margin-right: 1vw;
   &:hover {
     @include hover($blue, $primary-white)
+  }
+}
+
+.search-customers {
+  @include section-style(flex, 25vw, 45%, 0px, $gray);
+  justify-content: space-between;
+}
+
+#customer-field {
+  @include section-style(flex, 20vw, 100%, 0 1vw 0 0, auto);
+  @include font($main-font, 1.2vw, 200, $gray);
+  padding-left: 1vw;
+}
+
+#search-customers-button {
+  @include section-style(flex, 3vw, 2.9vw, 0 1vw 0 1vw, $gray);
+  @include icon-style(url(../images/loupe.svg), $gray);
+  border: none;
+  padding: 1vw;
+  &:hover {
+    @include section-style(flex, 3.5vw, 3.4vw, 0 1vw 0 1vw, $gray);
   }
 }
 

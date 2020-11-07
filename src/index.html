@@ -13,32 +13,32 @@
         </div>
         <h1 class="hotel-name">The Overlook</h1>
       </button>
-      <div class="search-customers hide">
-        <input id="customer-field" type="text" placeholder="Search customer by name" onfocus="this.placeholder=''">
-        <button id="search-customers-button" type="button" name="search-customer"></button>
-      </div>
     </header>
-    <div class="user-bar ">
-      <h2 id="welcome">Welcome, User</h2>
-      <div class="room-search">
-        <div class="room-type-inputs">
-          <label class="room-input-label" for="room-type-dropdown">Select Room</label>
-          <select class="room-input" name="rooms" id="rooms">
-            <option value="null"></option>
-            <option value="residential-suite">Residential Suite</option>
-            <option value="suite">Suite</option>
-            <option value="junior-suite">Junior Suite</option>
-            <option value="single-room">Single Room</option>
-          </select>
-        </div>
-        <div class="date-selector">
-          <label class="room-input-label" for="date-input">Select Date</label>
-          <input class="room-input" id="date-input" type="date" name="date" value="">
-        </div>
-        <button id="search-rooms-button" type="button" name="search-rooms">Search Rooms</button>
-      </div>
-    </div>
     <main>
+      <div class="user-bar ">
+        <h2 id="welcome">Welcome, User</h2>
+        <div class="search-customers">
+          <input id="customer-field" type="text" placeholder="Search customer by name" onfocus="this.placeholder=''">
+          <button id="search-customers-button" type="button" name="search-customer"></button>
+        </div>
+        <div class="room-search hide">
+          <div class="room-type-inputs">
+            <label class="room-input-label" for="room-type-dropdown">Select Room</label>
+            <select class="room-input" name="rooms" id="rooms">
+              <option value="null"></option>
+              <option value="residential-suite">Residential Suite</option>
+              <option value="suite">Suite</option>
+              <option value="junior-suite">Junior Suite</option>
+              <option value="single-room">Single Room</option>
+            </select>
+          </div>
+          <div class="date-selector">
+            <label class="room-input-label" for="date-input">Select Date</label>
+            <input class="room-input" id="date-input" type="date" name="date" value="">
+          </div>
+          <button id="search-rooms-button" type="button" name="search-rooms">Search Rooms</button>
+        </div>
+      </div>
       <section class="login-view hide">
         <article class="login-box">
           <label for="username">User Name</label>
