@@ -17,11 +17,11 @@
     <main>
       <div class="user-bar ">
         <h2 id="welcome">Welcome, User</h2>
-        <div class="search-customers">
+        <div class="search-customers hide">
           <input id="customer-field" type="text" placeholder="Search customer by name" onfocus="this.placeholder=''">
           <button id="search-customers-button" type="button" name="search-customer"></button>
         </div>
-        <div class="room-search hide">
+        <div class="room-search">
           <div class="room-type-inputs">
             <label class="room-input-label" for="room-type-dropdown">Select Room</label>
             <select class="room-input" name="rooms" id="rooms">
@@ -58,7 +58,7 @@
           <h3>Your hotel bookings:</h3>
         </div>
       </section>
-      <section class="manager-dash">
+      <section class="manager-dash hide">
         <div class="manager-info" id="total-revenue">
           <p>Total Revenue Today:</p>
           <p class="manager-data">73</p>
@@ -71,6 +71,33 @@
           <p>Rooms Available Today:</p>
           <p class="manager-data">73</p>
         </div>
+      </section>
+      <section class="room-results-view">
+        <h4>Search results for </h4>
+        <article class="search-result">
+          <div class="top-row">
+            <p class="column-left">2020/11/6</p>
+            <p class="column-middle">Suite</p>
+            <p class="column-right">Bed(s):</p>
+          </div>
+          <div class="bottom-row">
+            <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
+            <p class="column-middle">$491.73 per night</p>
+            <p class="column-right">1 Queen</p>
+          </div>
+          <!-- <div class="date-and-button">
+            <p class="room-date">2020/11/6</p>
+            <button class"book-room-button"type="button" name="book-room">Reserve Room</button>
+          </div>
+          <div class="room-info">
+            <p class="room-type">Suite</p>
+            <p class="room-cost">$491.73 per night</p>
+          </div>
+          <div class="bed-info">
+            <p class="bed-type">Bed(s):</p>
+            <p class="room-number">1 Queen</p>
+          </div> -->
+        </article>
       </section>
     </main>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->

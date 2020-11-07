@@ -1,5 +1,5 @@
 @mixin body-styling($color, $pad, $margin) {
-  background: $primary-white;
+  background: $color;
   font-family: $main-font;
   padding: 0px;
   margin: 0px;
