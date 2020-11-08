@@ -7,8 +7,11 @@ export default class User {
   }
 
   getUserBookings(bookingsData) {
-    let results = bookingsData.filter(booking => this.id === booking.userID);
-    return results;
+    let reservations = bookingsData.filter(booking => this.id === booking.userID);
+    // let results = reservations.sort((a, b) => {
+    //   return
+    // })
+    return reservations;
   }
 
   updateUserBookings(bookingsData) {

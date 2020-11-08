@@ -174,17 +174,32 @@ align-items: center;
 
 // ********* Customer Dashboard ********* //
 .customer-dash {
-  @include section-style(flex, 100%, 40vw, 0, $primary-white);
-  flex-direction: column;
-  justify-content: space-around;
+  @include section-style(normal, 100%, 40vw, 0, $primary-white);
+  // flex-direction: column;
+  // justify-content: space-around;
+  padding: 0;
+  overflow: auto;
 }
 
 .customer-info {
-  @include section-style(normal, 90%, auto, 0, $green);
+  @include section-style(normal, 90%, auto, 1.5vw auto 1.5vw auto, $green);
   @include font($main-font, 1.75vw, 200, $primary-white);
-  padding: 3vw;
+  padding: 2vw;
+  border: 1px solid $gray;
   border-radius: 2vw;
 }
+
+.customer-dash-h3 {
+  font-weight: 200;
+}
+
+.customer-charges {
+  font-size: 2.25vw;
+  font-weight: 400;
+}
+// #total-charges {
+//   height: 80px;
+// }
 
 // ********* Manager Dashboard ********* //
 .manager-dash {
@@ -221,21 +236,21 @@ h4 {
 }
 
 .search-result {
-  @include section-style(flex, 90%, auto, 0, $green);
-  @include font($main-font, 2.25vw, 200, $primary-white);
+  @include section-style(flex, 95%, auto, 1vw 0, $primary-white);
+  @include font($main-font, 1.5vw, 200, $gray);
   flex-direction: column;
-  padding: 3vw;
+  padding: 1vw;
   border-radius: 2vw;
 }
 
 .top-row {
-  @include section-style(flex, 80%, auto, 0, $green);
+  @include section-style(flex, 80%, auto, 0, $primary-white);
   justify-content: space-between;
   font-weight: bold;
 }
 
 .bottom-row {
-  @include section-style(flex, 80%, auto, 0, $green);
+  @include section-style(flex, 80%, auto, 0, $primary-white);
   justify-content: space-between;
 }
 

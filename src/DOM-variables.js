@@ -1,6 +1,7 @@
 export const homeButton = document.querySelector(".home-button");
 
 export const userBar = document.querySelector(".user-bar");
+export const welcome = document.querySelector("#welcome");
 export const roomSearchBar = document.querySelector(".room-search");
 export const roomTypeInput = document.querySelector("#rooms");
 export const roomDateInput = document.querySelector("#date-input");

@@ -1,6 +1,7 @@
 import {
   homeButton,
   userBar,
+  welcome,
   roomSearchBar,
   roomTypeInput,
   roomDateInput,
