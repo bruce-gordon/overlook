@@ -23,7 +23,7 @@ export const searchCustomerInput = document.querySelector("#customer-field");
 export const searchCustomerButton = document.querySelector("#search-customers-button");
 export const totalRevenue = document.querySelector("#total-revenue");
 export const percentOccupied = document.querySelector("#percent-occupied");
-export const roomsVacant = document.querySelector(".rooms-vacant");
+export const roomsVacant = document.querySelector("#rooms-vacant");
 
 export const roomResultsView = document.querySelector(".room-results-view")
 export const resultsHeading = document.querySelector("#results-heading");

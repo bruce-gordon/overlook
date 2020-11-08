@@ -47,6 +47,13 @@ export const domMethods = {
     loginError.classList.remove("hide");
   },
 
+  getManagerData: function(bookingRepo, date) {
+    welcome.innerText = `Manager Dashboard`;
+    totalRevenue.innerText = bookingRepo.findRevenueByDate(date);
+    percentOccupied.innerText = bookingRepo.findOccupiedRoomsPercent(date);
+    roomsVacant.innerText = bookingRepo.findNumberOfAvailableRooms(date);
+  },
+
   getCustomerData: function(user, roomsData) {
     welcome.innerText = `Welcome, ${user.name}`;
     customerCharges.innerText = `$${(user.moneySpent).toLocaleString('en')}`;

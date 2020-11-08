@@ -35,13 +35,31 @@ import {
   backButton
 } from './DOM-variables';
 
-export let userData;
-export let roomsData;
-export let bookingsData;
-export let user;
-export let manager;
+let userData;
+let roomsData;
+let bookingsData;
+let user;
+let manager;
+let bookingRepo;
+
+const findToday = () => {
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0');
+  let yyyy = today.getFullYear();
+  today = yyyy + '/' + mm + '/' + dd;
+  return today;
+}
+
+let today = findToday();
 
 // ----------Get Data----------
+const updateAllData = () => {
+  updateUserData();
+  updateRoomsData();
+  updateBookingsData();
+}
+
 const updateUserData = () => {
   getUsers()
   .then((data) => {
@@ -69,9 +87,10 @@ const updateBookingsData = () => {
   .catch(error => console.log(error));
 }
 
-updateUserData();
-updateRoomsData();
-updateBookingsData();
+updateAllData();
+// updateUserData();
+// updateRoomsData();
+// updateBookingsData();
 
 // ----------Event Listeners----------
 loginButton.addEventListener("click", () => {
@@ -80,6 +99,7 @@ loginButton.addEventListener("click", () => {
 
 // ----------Functions----------
 const login = (name, pWord) => {
+  bookingRepo = new BookingRepo(bookingsData, roomsData);
   checkManagerPassword(name, pWord);
   let userId = parseInt(name.slice(8));
   let allIds = userData.map(user => {
@@ -93,6 +113,7 @@ const checkManagerPassword = (name, pWord) => {
     if (pWord === 'overlook2020') {
       manager = new Manager({"id": null, "name": null}, bookingsData, roomsData);
       domMethods.showManagerDash();
+      domMethods.getManagerData(bookingRepo, "2020/01/24");
     } else {
       domMethods.showLoginError();
     }
@@ -109,28 +130,6 @@ const checkCustomerPassword = (userId, allIds, pWord) => {
     domMethods.showLoginError();
   }
 }
-
-// const getCustomerData = () => {
-//   welcome.innerText = `Welcome, ${user.name}`;
-//   customerCharges.innerText = `$${(user.moneySpent).toLocaleString('en')}`;
-//   user.bookings.forEach(booking => {
-//     let room = roomsData.find(roomData => roomData.number === booking.roomNumber);
-//   customerBookings.innerHTML +=
-//     `<article class="search-result">
-//       <div class="top-row">
-//         <p class="column-left">${booking.date}</p>
-//         <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
-//         <p class="column-right">Beds:</p>
-//       </div>
-//       <div class="bottom-row">
-//         <p class="column-left"></p>
-//         <p class="column-middle">$${(room.costPerNight).toLocaleString('en')} per night</p>
-//         <p class="column-right">${room.numBeds} ${room.bedSize}</p>
-//       </div>
-//     </article>`
-//   });
-// }
-
 
 // ----------Post Data----------
 const makeBooking = (date, roomNumber) => {
