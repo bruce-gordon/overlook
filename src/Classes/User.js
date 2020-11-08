@@ -8,10 +8,10 @@ export default class User {
 
   getUserBookings(bookingsData) {
     let reservations = bookingsData.filter(booking => this.id === booking.userID);
-    // let results = reservations.sort((a, b) => {
-    //   return
-    // })
-    return reservations;
+    let results = reservations.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date);
+    })
+    return results;
   }
 
   updateUserBookings(bookingsData) {
