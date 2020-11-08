@@ -104,33 +104,32 @@ const checkCustomerPassword = (userId, allIds, pWord) => {
     let currentUser = userData.find(person => person.id === userId);
     user = new User(currentUser, bookingsData, roomsData);
     domMethods.showCustomerDash(userId);
-    getCustomerData();
+    domMethods.getCustomerData(user, roomsData);
   } else {
     domMethods.showLoginError();
   }
 }
 
-const getCustomerData = () => {
-  welcome.innerText = `Welcome, ${user.name}`;
-  customerCharges.innerText = `$${(user.moneySpent).toLocaleString('en')}`;
-  // customerBookings.innerHTML = `<h3>Your hotel bookings:</h3>`;
-  user.bookings.forEach(booking => {
-    let room = roomsData.find(roomData => roomData.number === booking.roomNumber);
-  customerBookings.innerHTML +=
-    `<article class="search-result">
-      <div class="top-row">
-        <p class="column-left">${booking.date}</p>
-        <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
-        <p class="column-right">Beds:</p>
-      </div>
-      <div class="bottom-row">
-        <p class="column-left"></p>
-        <p class="column-middle">$${(room.costPerNight).toLocaleString('en')} per night</p>
-        <p class="column-right">${room.numBeds} ${room.bedSize}</p>
-      </div>
-    </article>`
-  });
-}
+// const getCustomerData = () => {
+//   welcome.innerText = `Welcome, ${user.name}`;
+//   customerCharges.innerText = `$${(user.moneySpent).toLocaleString('en')}`;
+//   user.bookings.forEach(booking => {
+//     let room = roomsData.find(roomData => roomData.number === booking.roomNumber);
+//   customerBookings.innerHTML +=
+//     `<article class="search-result">
+//       <div class="top-row">
+//         <p class="column-left">${booking.date}</p>
+//         <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
+//         <p class="column-right">Beds:</p>
+//       </div>
+//       <div class="bottom-row">
+//         <p class="column-left"></p>
+//         <p class="column-middle">$${(room.costPerNight).toLocaleString('en')} per night</p>
+//         <p class="column-right">${room.numBeds} ${room.bedSize}</p>
+//       </div>
+//     </article>`
+//   });
+// }
 
 
 // ----------Post Data----------
