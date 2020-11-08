@@ -29,7 +29,7 @@ export default class BookingRepo {
     let result = rates.reduce((sum, rate) => {
       return sum + rate;
     }, 0);
-    return `$${result}`;
+    return `$${(result).toLocaleString('en')}`;
   }
 
   findRevenueByDate(date) {

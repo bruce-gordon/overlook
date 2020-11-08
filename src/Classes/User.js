@@ -7,7 +7,10 @@ export default class User {
   }
 
   getUserBookings(bookingsData) {
-    let results = bookingsData.filter(booking => this.id === booking.userID);
+    let reservations = bookingsData.filter(booking => this.id === booking.userID);
+    let results = reservations.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date);
+    })
     return results;
   }
 
