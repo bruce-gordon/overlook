@@ -1,5 +1,6 @@
 export const homeButton = document.querySelector(".home-button");
 
+export const userBar = document.querySelector(".user-bar");
 export const roomSearchBar = document.querySelector(".room-search");
 export const roomTypeInput = document.querySelector("#rooms");
 export const roomDateInput = document.querySelector("#date-input");
@@ -16,7 +17,7 @@ export const customerCharges = document.querySelector(".customer-charges");
 export const customerBookings = document.querySelector("#customer-bookings");
 
 export const managerDash = document.querySelector(".manager-dash");
-export const userSearch = document.querySelector(".search-customers");
+export const searchCustomers = document.querySelector(".search-customers");
 export const searchCustomerInput = document.querySelector("#customer-field");
 export const searchCustomerButton = document.querySelector("#search-customers-button");
 export const totalRevenue = document.querySelector("#total-revenue");

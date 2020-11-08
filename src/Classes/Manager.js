@@ -1,6 +1,5 @@
 import User from './User';
 
-
 export default class Manager extends User {
   constructor(data, bookings, rooms) {
     super(data, bookings, rooms);

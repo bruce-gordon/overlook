@@ -8,6 +8,7 @@ import { getUsers, getRooms, getBookings, postBooking } from './fetch-requests';
 import { domMethods } from './DOM-methods';
 import {
   homeButton,
+  userBar,
   roomSearchBar,
   roomTypeInput,
   roomDateInput,
@@ -21,12 +22,13 @@ import {
   customerCharges,
   customerBookings,
   managerDash,
-  userSearch,
+  searchCustomers,
   searchCustomerInput,
   searchCustomerButton,
   totalRevenue,
   percentOccupied,
   roomsVacant,
+  roomResultsView,
   resultsHeading,
   searchResult,
   backButton
@@ -36,21 +38,7 @@ let userData;
 let roomsData;
 let bookingsData;
 let user;
-
-loginButton.addEventListener("click", () => {
-  login(userName.value, password.value);
-})
-
-const login = (userName, password) => {
-  let userID = parseInt(userName.slice(8));
-  let allIds = userData.map(user => {
-    return user.id;
-  })
-  if (allIds.includes(userID) && password === 'overlook2020') {
-    user = new User(userData[userID - 1], bookingsData, roomsData);
-  }
-
-}
+let manager;
 
 const updateUserData = () => {
   getUsers()
@@ -79,6 +67,58 @@ const updateBookingsData = () => {
 updateUserData();
 updateRoomsData();
 updateBookingsData();
+
+loginButton.addEventListener("click", () => {
+  login(userName.value, password.value);
+})
+
+const login = (name, pWord) => {
+  checkManagerPassword(name, pWord);
+  let userId = parseInt(name.slice(8));
+  let allIds = userData.map(user => {
+    return user.id;
+  });
+  checkCustomerPassword(userId, allIds, pWord);
+}
+
+const checkManagerPassword = (name, pWord) => {
+  if (name === 'manager') {
+    if (pWord === 'overlook2020') {
+      showManagerDash();
+    } else {
+      showLoginError();
+    }
+  }
+}
+
+const checkCustomerPassword = (userId, allIds, pWord) => {
+  if (allIds.includes(userId) && pWord === 'overlook2020') {
+    showCustomerDash(userId);
+  } else {
+    showLoginError();
+  }
+}
+
+const showCustomerDash = (userId) => {
+  user = new User(userData[userId - 1], bookingsData, roomsData);
+  loginView.classList.add("hide");
+  customerDash.classList.remove("hide");
+  userBar.classList.remove("hide");
+  roomSearchBar.classList.remove("hide");
+}
+
+const showManagerDash = () => {
+  manager = new Manager({"id": null, "name": null}, bookingsData, roomsData);
+  loginView.classList.add("hide");
+  managerDash.classList.remove("hide");
+  userBar.classList.remove("hide");
+  searchCustomers.classList.remove("hide");
+}
+
+const showLoginError = () => {
+  password.value ="";
+  loginError.classList.remove("hide");
+}
 
 const makeBooking = (date, roomNumber) => {
   let bookingDetails = user.bookRoom(date, roomNumber);

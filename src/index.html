@@ -18,13 +18,13 @@
       <nav class="user-bar hide">
         <div class="welcome-and-back">
           <h2 id="welcome">Welcome, User</h2>
-          <button class="back-button" type="button" name="go-back"></button>
+          <button class="back-button hide" type="button" name="go-back"></button>
         </div>
         <div class="search-customers hide">
           <input id="customer-field" type="text" placeholder="Search customer by name" onfocus="this.placeholder=''">
           <button id="search-customers-button" type="button" name="search-customer"></button>
         </div>
-        <div class="room-search">
+        <div class="room-search hide">
           <div class="room-type-inputs">
             <label class="room-input-label" for="room-type-dropdown">Select Room</label>
             <select class="room-input" name="rooms" id="rooms">
@@ -50,7 +50,7 @@
           <input class="login-input" id="password-input"type="password" name="password">
           <button class="login-button" type="button" name="login">Log In</button>
         </article>
-        <p class="login-error hide">Username or Password is incorrect.  Please try again.</p>
+        <p class="login-error hide">Username or Password is incorrect.  Please try again.  Username and Password are both case sensitive.</p>
       </section>
       <section class="customer-dash hide">
         <div class="customer-info" id="total-charges">
