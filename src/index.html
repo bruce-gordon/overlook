@@ -15,13 +15,16 @@
       </button>
     </header>
     <main>
-      <div class="user-bar ">
-        <h2 id="welcome">Welcome, User</h2>
+      <nav class="user-bar hide">
+        <div class="welcome-and-back">
+          <h2 id="welcome">Welcome, User</h2>
+          <button class="back-button hide" type="button" name="go-back"></button>
+        </div>
         <div class="search-customers hide">
           <input id="customer-field" type="text" placeholder="Search customer by name" onfocus="this.placeholder=''">
           <button id="search-customers-button" type="button" name="search-customer"></button>
         </div>
-        <div class="room-search">
+        <div class="room-search hide">
           <div class="room-type-inputs">
             <label class="room-input-label" for="room-type-dropdown">Select Room</label>
             <select class="room-input" name="rooms" id="rooms">
@@ -38,65 +41,53 @@
           </div>
           <button id="search-rooms-button" type="button" name="search-rooms">Search Rooms</button>
         </div>
-      </div>
-      <section class="login-view hide">
+      </nav>
+      <section class="login-view">
         <article class="login-box">
           <label for="username">User Name</label>
-          <input class="login-input" type="text" name="username">
+          <input class="login-input" id="username-input" type="text" name="username">
           <label for="password">Password</label>
-          <input class="login-input" type="password" name="password">
+          <input class="login-input" id="password-input"type="password" name="password">
           <button class="login-button" type="button" name="login">Log In</button>
         </article>
-        <p class="login-error hide">Username or Password is incorrect.  Please try again.</p>
+        <p class="login-error hide">Username or Password is incorrect.  Please try again.  Username and Password are both case sensitive.</p>
       </section>
       <section class="customer-dash hide">
         <div class="customer-info" id="total-charges">
           <h3>Total charges:<h3>
-          <p>73</p>
+          <p class="customer-charges">73</p>
         </div>
         <div class="customer-info" id="customer-bookings">
           <h3>Your hotel bookings:</h3>
         </div>
       </section>
       <section class="manager-dash hide">
-        <div class="manager-info" id="total-revenue">
+        <div class="manager-info">
           <p>Total Revenue Today:</p>
-          <p class="manager-data">73</p>
+          <p class="manager-data" id="total-revenue">73</p>
         </div>
-        <div class="manager-info" id="percent-occupied">
+        <div class="manager-info">
           <p>Percent of Rooms Occupied Today:</p>
-          <p class="manager-data">73</p>
+          <p class="manager-data" id="percent-occupied">73</p>
         </div>
-        <div class="manager-info" id="rooms-available">
-          <p>Rooms Available Today:</p>
-          <p class="manager-data">73</p>
+        <div class="manager-info">
+          <p>Vacant Rooms Today:</p>
+          <p class="manager-data" id=rooms-vacant>73</p>
         </div>
       </section>
-      <section class="room-results-view">
-        <h4>Search results for </h4>
+      <section class="room-results-view hide">
+        <h4 id="results-heading">Search Results</h4>
         <article class="search-result">
           <div class="top-row">
             <p class="column-left">2020/11/6</p>
             <p class="column-middle">Suite</p>
-            <p class="column-right">Bed(s):</p>
+            <p class="column-right">Beds:</p>
           </div>
           <div class="bottom-row">
             <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
             <p class="column-middle">$491.73 per night</p>
             <p class="column-right">1 Queen</p>
           </div>
-          <!-- <div class="date-and-button">
-            <p class="room-date">2020/11/6</p>
-            <button class"book-room-button"type="button" name="book-room">Reserve Room</button>
-          </div>
-          <div class="room-info">
-            <p class="room-type">Suite</p>
-            <p class="room-cost">$491.73 per night</p>
-          </div>
-          <div class="bed-info">
-            <p class="bed-type">Bed(s):</p>
-            <p class="room-number">1 Queen</p>
-          </div> -->
         </article>
       </section>
     </main>
