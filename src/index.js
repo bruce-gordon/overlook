@@ -34,18 +34,20 @@ import {
   backButton
 } from './DOM-variables';
 
-let userData;
-let roomsData;
-let bookingsData;
-let user;
-let manager;
+export let userData;
+export let roomsData;
+export let bookingsData;
+export let user;
+export let manager;
 
+// ----------Get Data----------
 const updateUserData = () => {
   getUsers()
   .then((data) => {
     userData = data.users;
     console.log(userData);
-  });
+  })
+  .catch(error => console.log(error));
 }
 
 const updateRoomsData = () => {
@@ -54,6 +56,7 @@ const updateRoomsData = () => {
     roomsData = data.rooms;
     console.log(roomsData);
   })
+  .catch(error => console.log(error));
 }
 
 const updateBookingsData = () => {
@@ -62,16 +65,19 @@ const updateBookingsData = () => {
     bookingsData = data.bookings;
     console.log(bookingsData)
   })
+  .catch(error => console.log(error));
 }
 
 updateUserData();
 updateRoomsData();
 updateBookingsData();
 
+// ----------Event Listeners----------
 loginButton.addEventListener("click", () => {
   login(userName.value, password.value);
 })
 
+// ----------Functions----------
 const login = (name, pWord) => {
   checkManagerPassword(name, pWord);
   let userId = parseInt(name.slice(8));
@@ -84,42 +90,25 @@ const login = (name, pWord) => {
 const checkManagerPassword = (name, pWord) => {
   if (name === 'manager') {
     if (pWord === 'overlook2020') {
-      showManagerDash();
+      manager = new Manager({"id": null, "name": null}, bookingsData, roomsData);
+      domMethods.showManagerDash();
     } else {
-      showLoginError();
+      domMethods.showLoginError();
     }
   }
 }
 
 const checkCustomerPassword = (userId, allIds, pWord) => {
   if (allIds.includes(userId) && pWord === 'overlook2020') {
-    showCustomerDash(userId);
+    let currentUser = userData.find(person => person.id === userId);
+    user = new User(currentUser, bookingsData, roomsData);
+    domMethods.showCustomerDash(userId);
   } else {
-    showLoginError();
+    domMethods.showLoginError();
   }
 }
 
-const showCustomerDash = (userId) => {
-  user = new User(userData[userId - 1], bookingsData, roomsData);
-  loginView.classList.add("hide");
-  customerDash.classList.remove("hide");
-  userBar.classList.remove("hide");
-  roomSearchBar.classList.remove("hide");
-}
-
-const showManagerDash = () => {
-  manager = new Manager({"id": null, "name": null}, bookingsData, roomsData);
-  loginView.classList.add("hide");
-  managerDash.classList.remove("hide");
-  userBar.classList.remove("hide");
-  searchCustomers.classList.remove("hide");
-}
-
-const showLoginError = () => {
-  password.value ="";
-  loginError.classList.remove("hide");
-}
-
+// ----------Post Data----------
 const makeBooking = (date, roomNumber) => {
   let bookingDetails = user.bookRoom(date, roomNumber);
   postBooking(bookingDetails)
