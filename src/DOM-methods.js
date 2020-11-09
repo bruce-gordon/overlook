@@ -96,12 +96,16 @@ export const domMethods = {
       this.isManager();
     } else {
       this.goToDash(customerDash, managerDash, searchCustomers);
-      customerBookings.innerHTML = '';
-      backButton.classList.add('hide');
-      roomSearchBar.classList.add('hide');
-      searchCustomerInput.value = '';
-      welcome.innerText = `Manager Dashboard`;
+      this.resetManagerDash();
     }
+  },
+
+  resetManagerDash: function() {
+    customerBookings.innerHTML = '';
+    backButton.classList.add('hide');
+    roomSearchBar.classList.add('hide');
+    searchCustomerInput.value = '';
+    welcome.innerText = `Manager Dashboard`;
   },
 
   isManager: function() {
