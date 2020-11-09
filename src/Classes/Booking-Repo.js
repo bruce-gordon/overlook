@@ -62,7 +62,6 @@ export default class BookingRepo {
       }
       return available;
     },[]);
-    debugger;
     return this.filterRoomsByType(openRooms, type);
   }
 }

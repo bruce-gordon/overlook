@@ -18,6 +18,7 @@ import {
   searchCustomers,
   searchCustomerInput,
   searchCustomerButton,
+  deleteBooking,
   totalRevenue,
   percentOccupied,
   roomsVacant,
@@ -27,12 +28,15 @@ import {
   backButton
 } from './DOM-variables';
 
+import Manager from '../src/Classes/Manager';
+
 export const domMethods = {
-  showCustomerDash: function() {
+  showCustomerDash: function(user) {
     loginView.classList.add("hide");
     customerDash.classList.remove("hide");
     userBar.classList.remove("hide");
     roomSearchBar.classList.remove("hide");
+    welcome.innerText = `Welcome, ${user.name}`;
   },
 
   showManagerDash: function() {
@@ -56,10 +60,10 @@ export const domMethods = {
   },
 
   getCustomerData: function(user, roomsData) {
-    welcome.innerText = `Welcome, ${user.name}`;
     customerCharges.innerText = `$${(user.moneySpent).toLocaleString('en')}`;
     user.bookings.forEach(booking => {
       let room = roomsData.find(roomData => roomData.number === booking.roomNumber);
+    let deleteButton = this.checkForManager(user);
     customerBookings.innerHTML +=
       `<article class="search-result">
         <div class="top-row">
@@ -68,13 +72,21 @@ export const domMethods = {
           <p class="column-right">Beds:</p>
         </div>
         <div class="bottom-row">
-          <p class="column-left"></p>
+          <p class="column-left">${deleteButton}</p>
           <p class="column-middle">$${(room.costPerNight).toLocaleString('en')} per night</p>
           <p class="column-right">${room.numBeds} ${room.bedSize}</p>
         </div>
       </article>`
     });
     document.documentElement.scrollTop = 0;
+  },
+
+  checkForManager: function(user) {
+    if (user instanceof Manager) {
+      return `<button class="book-room-button" type="button" name="delete-booking-button">Delete Booking</button>`;
+    } else {
+      return '';
+    }
   },
 
   searchRooms: function(bookingRepo, dateInput, type) {
@@ -85,18 +97,22 @@ export const domMethods = {
     } else {
       let date = dateInput.replaceAll("-", "/");
       let openRooms = bookingRepo.searchAvailableRoomsByDate(date, type);
-      console.log("OPEN", openRooms);
       this.displayRoomResults(openRooms, date);
     }
   },
+  convertDate: function(date) {
+    let parts = date.split("/");
+    return parts[1] + "/" + parts[2] + "/" + parts[0];
+  },
 
   displayRoomResults: function(openRooms, date) {
+    let shownDate = this.convertDate(date);
     roomResultsView.innerHTML = `<h4 id="results-heading">Search Results</h4>`
     openRooms.forEach(room => {
       roomResultsView.insertAdjacentHTML('beforeend',
     `<article class="search-result">
       <div class="top-row">
-        <p class="column-left">${date}</p>
+        <p class="column-left">${shownDate}</p>
         <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
         <p class="column-right">Beds:</p>
       </div>
@@ -107,7 +123,21 @@ export const domMethods = {
       </div>
     </article>`)
     })
+    backButton.classList.remove('hide');
+  },
+
+  findUserAccount: function(name, userData, bookingsData, roomsData, manager) {
+    manager.selectUser(name, userData, bookingsData, roomsData);
+    welcome.innerHTML = `Manager Dashboard - Customer: <span>${manager.name}</span>, ID: <span>${manager.id}</span>`;
+    managerDash.classList.add('hide');
+    customerDash.classList.remove('hide');
+    roomSearchBar.classList.remove("hide");
+    searchCustomers.classList.add("hide");
+    this.getCustomerData(manager, roomsData);
+
   }
+
+
 
 
 }
