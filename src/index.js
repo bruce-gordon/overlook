@@ -105,7 +105,7 @@ searchCustomerButton.addEventListener("click", () => {
 })
 
 backButton.addEventListener("click", () => {
-  
+  domMethods.goBack();
 })
 
 // ----------Functions----------

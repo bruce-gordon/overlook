@@ -32,18 +32,19 @@ import Manager from '../src/Classes/Manager';
 
 export const domMethods = {
   showCustomerDash: function(user) {
-    loginView.classList.add("hide");
-    customerDash.classList.remove("hide");
-    userBar.classList.remove("hide");
-    roomSearchBar.classList.remove("hide");
+    this.goToDash(loginView, customerDash, roomSearchBar);
     welcome.innerText = `Welcome, ${user.name}`;
   },
 
   showManagerDash: function() {
-    loginView.classList.add("hide");
-    managerDash.classList.remove("hide");
+    this.goToDash(loginView, managerDash, searchCustomers);
+  },
+
+  goToDash: function(hide, dash, bar) {
+    dash.classList.remove("hide");
+    bar.classList.remove("hide");
+    hide.classList.add("hide");
     userBar.classList.remove("hide");
-    searchCustomers.classList.remove("hide");
   },
 
   showLoginError: function() {
@@ -86,6 +87,27 @@ export const domMethods = {
       return `<button class="book-room-button" type="button" name="delete-booking-button">Delete Booking</button>`;
     } else {
       return '';
+    }
+  },
+
+  goBack: function() {
+    if (customerDash.classList.contains('hide')){
+      this.goToDash(roomResultsView, customerDash, roomSearchBar);
+      this.isManager();
+    } else {
+      this.goToDash(customerDash, managerDash, searchCustomers);
+      customerBookings.innerHTML = '';
+      backButton.classList.add('hide');
+      roomSearchBar.classList.add('hide');
+      welcome.innerText = `Manager Dashboard`;
+    }
+  },
+
+  isManager: function() {
+    if (welcome.innerText.includes('Manager Dashboard - Customer')) {
+
+    } else {
+      backButton.classList.add('hide');
     }
   },
 
@@ -133,8 +155,8 @@ export const domMethods = {
     customerDash.classList.remove('hide');
     roomSearchBar.classList.remove("hide");
     searchCustomers.classList.add("hide");
+    backButton.classList.remove('hide');
     this.getCustomerData(manager, roomsData);
-
   }
 
 
