@@ -45,7 +45,15 @@ export default class BookingRepo {
     return this.addRates(money);
   }
 
-  searchAvailableRoomsByDate(date) {
+  filterRoomsByType(openRooms, type) {
+    if (type) {
+      return openRooms.filter(room => room.roomType === type);
+    } else {
+      return openRooms;
+    }
+  }
+
+  searchAvailableRoomsByDate(date, type) {
     let occupied = this.findBookingsByDate(date);
     let takenRooms = occupied.map(booking => booking.roomNumber);
     let openRooms = this.rooms.reduce((available, room) => {
@@ -54,6 +62,7 @@ export default class BookingRepo {
       }
       return available;
     },[]);
-    return openRooms;
+    debugger;
+    return this.filterRoomsByType(openRooms, type);
   }
 }

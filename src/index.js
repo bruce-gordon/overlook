@@ -88,13 +88,15 @@ const updateBookingsData = () => {
 }
 
 updateAllData();
-// updateUserData();
-// updateRoomsData();
-// updateBookingsData();
+
 
 // ----------Event Listeners----------
 loginButton.addEventListener("click", () => {
   login(userName.value, password.value);
+})
+
+searchRoomsButton.addEventListener("click", () => {
+  domMethods.searchRooms(bookingRepo, roomDateInput.value, roomTypeInput.value);
 })
 
 // ----------Functions----------

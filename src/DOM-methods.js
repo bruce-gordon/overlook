@@ -52,6 +52,7 @@ export const domMethods = {
     totalRevenue.innerText = bookingRepo.findRevenueByDate(date);
     percentOccupied.innerText = bookingRepo.findOccupiedRoomsPercent(date);
     roomsVacant.innerText = bookingRepo.findNumberOfAvailableRooms(date);
+    document.documentElement.scrollTop = 0;
   },
 
   getCustomerData: function(user, roomsData) {
@@ -73,5 +74,40 @@ export const domMethods = {
         </div>
       </article>`
     });
+    document.documentElement.scrollTop = 0;
+  },
+
+  searchRooms: function(bookingRepo, dateInput, type) {
+    roomResultsView.classList.remove('hide');
+    customerDash.classList.add('hide');
+    if (!dateInput) {
+      roomResultsView.innerHTML = `<h4 id="results-heading">Please enter a date and then click "Search Rooms" again.</h4>`
+    } else {
+      let date = dateInput.replaceAll("-", "/");
+      let openRooms = bookingRepo.searchAvailableRoomsByDate(date, type);
+      console.log("OPEN", openRooms);
+      this.displayRoomResults(openRooms, date);
+    }
+  },
+
+  displayRoomResults: function(openRooms, date) {
+    roomResultsView.innerHTML = `<h4 id="results-heading">Search Results</h4>`
+    openRooms.forEach(room => {
+      roomResultsView.insertAdjacentHTML('beforeend',
+    `<article class="search-result">
+      <div class="top-row">
+        <p class="column-left">${date}</p>
+        <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
+        <p class="column-right">Beds:</p>
+      </div>
+      <div class="bottom-row">
+        <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
+        <p class="column-middle">$${room.costPerNight}</p>
+        <p class="column-right">${room.numBeds} ${room.bedSize}</p>
+      </div>
+    </article>`)
+    })
   }
+
+
 }
