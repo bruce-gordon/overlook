@@ -26,6 +26,7 @@ import {
   searchCustomers,
   searchCustomerInput,
   searchCustomerButton,
+  deleteBooking,
   totalRevenue,
   percentOccupied,
   roomsVacant,
@@ -88,13 +89,23 @@ const updateBookingsData = () => {
 }
 
 updateAllData();
-// updateUserData();
-// updateRoomsData();
-// updateBookingsData();
+
 
 // ----------Event Listeners----------
 loginButton.addEventListener("click", () => {
   login(userName.value, password.value);
+})
+
+searchRoomsButton.addEventListener("click", () => {
+  domMethods.searchRooms(bookingRepo, roomDateInput.value, roomTypeInput.value);
+})
+
+searchCustomerButton.addEventListener("click", () => {
+  domMethods.findUserAccount(searchCustomerInput.value, userData, bookingsData, roomsData, manager);
+})
+
+backButton.addEventListener("click", () => {
+  domMethods.goBack();
 })
 
 // ----------Functions----------
@@ -124,7 +135,7 @@ const checkCustomerPassword = (userId, allIds, pWord) => {
   if (allIds.includes(userId) && pWord === 'overlook2020') {
     let currentUser = userData.find(person => person.id === userId);
     user = new User(currentUser, bookingsData, roomsData);
-    domMethods.showCustomerDash(userId);
+    domMethods.showCustomerDash(user);
     domMethods.getCustomerData(user, roomsData);
   } else {
     domMethods.showLoginError();

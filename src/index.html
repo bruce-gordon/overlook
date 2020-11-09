@@ -21,18 +21,18 @@
           <button class="back-button hide" type="button" name="go-back"></button>
         </div>
         <div class="search-customers hide">
-          <input id="customer-field" type="text" placeholder="Search customer by name" onfocus="this.placeholder=''">
+          <input id="customer-field" type="text" placeholder="Search for customers by name" onfocus="this.placeholder=''">
           <button id="search-customers-button" type="button" name="search-customer"></button>
         </div>
         <div class="room-search hide">
           <div class="room-type-inputs">
             <label class="room-input-label" for="room-type-dropdown">Select Room</label>
             <select class="room-input" name="rooms" id="rooms">
-              <option value="null"></option>
-              <option value="residential-suite">Residential Suite</option>
+              <option value=""></option>
+              <option value="residential suite">Residential Suite</option>
               <option value="suite">Suite</option>
-              <option value="junior-suite">Junior Suite</option>
-              <option value="single-room">Single Room</option>
+              <option value="junior suite">Junior Suite</option>
+              <option value="single room">Single Room</option>
             </select>
           </div>
           <div class="date-selector">
@@ -76,19 +76,6 @@
         </div>
       </section>
       <section class="room-results-view hide">
-        <h4 id="results-heading">Search Results</h4>
-        <article class="search-result">
-          <div class="top-row">
-            <p class="column-left">2020/11/6</p>
-            <p class="column-middle">Suite</p>
-            <p class="column-right">Beds:</p>
-          </div>
-          <div class="bottom-row">
-            <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
-            <p class="column-middle">$491.73 per night</p>
-            <p class="column-right">1 Queen</p>
-          </div>
-        </article>
       </section>
     </main>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->

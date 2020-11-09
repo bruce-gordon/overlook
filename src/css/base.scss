@@ -114,7 +114,7 @@ align-items: center;
 }
 
 .search-customers {
-  @include section-style(flex, 25vw, 45%, 0px, $gray);
+  @include section-style(flex, 27vw, 45%, 0px, $gray);
   justify-content: space-between;
 }
 
@@ -224,7 +224,7 @@ align-items: center;
 
 // ********* Search Results ********* //
 h4 {
-  @include section-style(normal, 100%, auto, 1vw 0, $primary-white);
+  @include section-style(normal, 100%, auto, 1vw 0, none);
   @include font($secondary-font, 2vw, 400, $gray);
   text-align: center;
 }
@@ -233,6 +233,7 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: $light-gray;
 }
 
 .search-result {
@@ -241,6 +242,7 @@ h4 {
   flex-direction: column;
   padding: 1vw;
   border-radius: 2vw;
+  border: 2px solid $blue;
 }
 
 .top-row {
@@ -272,7 +274,7 @@ h4 {
   width: 30%;
 }
 
-.book-room-button {
+.book-room-button, .delete-booking-button {
   @include section-style(normal, 80%, 40%, 5px, normal);
   @include font($main-font, 1.25vw, 200, $gray);
   &:hover {
@@ -280,6 +282,10 @@ h4 {
   }
 }
 // ********* Class Change ********* //
+span {
+  font-weight: bold;
+}
+
 .hide {
   display: none;
 }
