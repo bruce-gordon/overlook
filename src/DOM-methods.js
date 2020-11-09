@@ -99,6 +99,7 @@ export const domMethods = {
       customerBookings.innerHTML = '';
       backButton.classList.add('hide');
       roomSearchBar.classList.add('hide');
+      searchCustomerInput.value = '';
       welcome.innerText = `Manager Dashboard`;
     }
   },
