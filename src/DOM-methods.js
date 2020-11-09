@@ -64,20 +64,20 @@ export const domMethods = {
     customerCharges.innerText = `$${(user.moneySpent).toLocaleString('en')}`;
     user.bookings.forEach(booking => {
       let room = roomsData.find(roomData => roomData.number === booking.roomNumber);
-    let deleteButton = this.checkForManager(user);
-    customerBookings.innerHTML +=
-      `<article class="search-result">
-        <div class="top-row">
-          <p class="column-left">${booking.date}</p>
-          <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
-          <p class="column-right">Beds:</p>
-        </div>
-        <div class="bottom-row">
-          <p class="column-left">${deleteButton}</p>
-          <p class="column-middle">$${(room.costPerNight).toLocaleString('en')} per night</p>
-          <p class="column-right">${room.numBeds} ${room.bedSize}</p>
-        </div>
-      </article>`
+      let deleteButton = this.checkForManager(user);
+      customerBookings.innerHTML +=
+        `<article class="search-result">
+          <div class="top-row">
+            <p class="column-left">${booking.date}</p>
+            <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
+            <p class="column-right">Beds:</p>
+          </div>
+          <div class="bottom-row">
+            <p class="column-left">${deleteButton}</p>
+            <p class="column-middle">$${(room.costPerNight).toLocaleString('en')} per night</p>
+            <p class="column-right">${room.numBeds} ${room.bedSize}</p>
+          </div>
+        </article>`
     });
     document.documentElement.scrollTop = 0;
   },
@@ -134,22 +134,26 @@ export const domMethods = {
 
   displayRoomResults: function(openRooms, date) {
     let shownDate = this.convertDate(date);
-    roomResultsView.innerHTML = `<h4 id="results-heading">Search Results</h4>`
-    openRooms.forEach(room => {
-      roomResultsView.insertAdjacentHTML('beforeend',
-    `<article class="search-result">
-      <div class="top-row">
-        <p class="column-left">${shownDate}</p>
-        <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
-        <p class="column-right">Beds:</p>
-      </div>
-      <div class="bottom-row">
-        <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
-        <p class="column-middle">$${room.costPerNight}</p>
-        <p class="column-right">${room.numBeds} ${room.bedSize}</p>
-      </div>
-    </article>`)
-    })
+    if (!openRooms.length) {
+      roomResultsView.innerHTML = `<h4 id="results-heading">We sincerely apologize that there are no rooms available that match your search.  Please adjust your date or type of room and search again. </h4>`
+    } else {
+      roomResultsView.innerHTML = `<h4 id="results-heading">Search Results</h4>`
+      openRooms.forEach(room => {
+        roomResultsView.insertAdjacentHTML('beforeend',
+      `<article class="search-result">
+        <div class="top-row">
+          <p class="column-left">${shownDate}</p>
+          <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
+          <p class="column-right">Beds:</p>
+        </div>
+        <div class="bottom-row">
+          <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
+          <p class="column-middle">$${room.costPerNight}</p>
+          <p class="column-right">${room.numBeds} ${room.bedSize}</p>
+        </div>
+      </article>`)
+      })
+    }
     backButton.classList.remove('hide');
   },
 
