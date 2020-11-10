@@ -105,7 +105,7 @@ searchCustomerButton.addEventListener("click", () => {
 })
 
 backButton.addEventListener("click", () => {
-  domMethods.goBack();
+  domMethods.goBack(bookingRepo, today);
 })
 
 roomResultsView.addEventListener("click", () => {
@@ -128,7 +128,7 @@ const checkManagerPassword = (name, pWord) => {
     if (pWord === 'overlook2020') {
       manager = new Manager({"id": null, "name": null}, bookingsData, roomsData);
       domMethods.showManagerDash();
-      domMethods.getManagerData(bookingRepo, "2020/01/24");
+      domMethods.getManagerData(bookingRepo, today);
     } else {
       domMethods.showLoginError();
     }
@@ -168,8 +168,8 @@ const makeBooking = (event) => {
     let bookingDetails = userOrManager().bookRoom(date, roomNumber);
     postBooking(bookingDetails)
     .then(() => updateBookingsData()
-      .then(() => user.updateUserBookings(bookingsData))
-      .then(() => domMethods.getCustomerData(user, roomsData)))
+      .then(() => userOrManager().updateUserBookings(bookingsData))
+      .then(() => domMethods.getCustomerData(userOrManager(), roomsData)))
     .catch((error) => console.log(error));
   }
 }

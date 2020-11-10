@@ -62,6 +62,7 @@ export const domMethods = {
 
   getCustomerData: function(user, roomsData) {
     customerCharges.innerText = `$${(user.moneySpent).toLocaleString('en')}`;
+    customerBookings.innerHTML = '';
     user.bookings.forEach(booking => {
       let room = roomsData.find(roomData => roomData.number === booking.roomNumber);
       let deleteButton = this.checkForManager(user);
@@ -90,22 +91,22 @@ export const domMethods = {
     }
   },
 
-  goBack: function() {
+  goBack: function(bookingRepo, today) {
     if (customerDash.classList.contains('hide')){
       this.goToDash(roomResultsView, customerDash, roomSearchBar);
       this.isManager();
     } else {
       this.goToDash(customerDash, managerDash, searchCustomers);
-      this.resetManagerDash();
+      this.resetManagerDash(bookingRepo, today);
     }
   },
 
-  resetManagerDash: function() {
+  resetManagerDash: function(bookingRepo, today) {
     customerBookings.innerHTML = '';
     backButton.classList.add('hide');
     roomSearchBar.classList.add('hide');
     searchCustomerInput.value = '';
-    welcome.innerText = `Manager Dashboard`;
+    this.getManagerData(bookingRepo, today)
   },
 
   isManager: function() {
