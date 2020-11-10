@@ -53,6 +53,7 @@ const findToday = () => {
 }
 
 let today = findToday();
+console.log(today);
 
 // ----------Get Data----------
 const updateAllData = () => {
@@ -111,6 +112,16 @@ roomResultsView.addEventListener("click", () => {
 
 customerBookings.addEventListener("click", () => {
   cancelBooking(event);
+})
+
+roomTypeInput.addEventListener("click", () => {
+  let open = roomTypeInput.getAttribute("aria-expanded");
+
+  if (open === 'false') {
+    roomTypeInput.setAttribute("aria-expanded", true);
+  } else {
+    roomTypeInput.setAttribute("aria-expanded", false);
+  }
 })
 
 // ----------Login Functions----------

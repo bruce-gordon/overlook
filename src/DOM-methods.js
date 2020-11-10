@@ -63,20 +63,21 @@ export const domMethods = {
   getCustomerData: function(user, roomsData) {
     customerCharges.innerText = `$${(user.moneySpent).toLocaleString('en')}`;
     customerBookings.innerHTML = '';
+    console.log(user.bookings)
     user.bookings.forEach(booking => {
-      let room = roomsData.find(roomData => roomData.number === booking.roomNumber);
+      let room = roomsData.find(roomData => roomData.number === Number(booking.roomNumber));
       let deleteButton = this.checkForManager(user);
       customerBookings.innerHTML +=
         `<article class="search-result">
           <div class="top-row">
-            <p class="column-left">${this.convertDate(booking.date)}</p>
-            <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
-            <p class="column-right">Beds:</p>
+            <p tabindex="0" class="column-left">${this.convertDate(booking.date)}</p>
+            <p tabindex="0" class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
+            <p tabindex="0" class="column-right">Beds:</p>
           </div>
           <div class="bottom-row">
             <p class="column-left">${deleteButton}</p>
-            <p class="column-middle">$${(room.costPerNight).toLocaleString('en')} per night</p>
-            <p class="column-right">${room.numBeds} ${room.bedSize}</p>
+            <p tabindex="0" class="column-middle">$${(room.costPerNight).toLocaleString('en')} per night</p>
+            <p tabindex="0" class="column-right">${room.numBeds} ${room.bedSize}</p>
             <p class="booking-id hide">${booking.id}</p>
           </div>
         </article>`
@@ -145,14 +146,14 @@ export const domMethods = {
         roomResultsView.insertAdjacentHTML('beforeend',
       `<article class="search-result">
         <div class="top-row">
-          <p class="column-left">${shownDate}</p>
-          <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
-          <p class="column-right">Beds:</p>
+          <p tabindex="0" class="column-left">${shownDate}</p>
+          <p tabindex="0" class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
+          <p tabindex="0" class="column-right">Beds:</p>
         </div>
         <div class="bottom-row">
           <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
-          <p class="column-middle">$${room.costPerNight}</p>
-          <p class="column-right">${room.numBeds} ${room.bedSize}</p>
+          <p tabindex="0" class="column-middle">$${room.costPerNight}</p>
+          <p tabindex="0" class="column-right">${room.numBeds} ${room.bedSize}</p>
           <p class="room-num hide">${room.number}</p>
         </div>
       </article>`)
