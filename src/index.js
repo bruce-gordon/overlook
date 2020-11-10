@@ -165,7 +165,11 @@ const formatPostingDate = (event) => {
   return parts[2] + '/' + parts[0] + '/' + parts[1];
 }
 
-
+const refreshCustomerBookings = () => {
+  updateBookingsData()
+    .then(() => userOrManager().updateUserBookings(bookingsData))
+    .then(() => domMethods.getCustomerData(userOrManager(), roomsData))
+}
 
 const cancelBooking = (event) => {
   if (event.target.classList.contains('delete')) {
@@ -173,9 +177,10 @@ const cancelBooking = (event) => {
     let input = manager.deleteBookedRoom(bookingId)
     deleteBooking(input)
     .then((data) => console.log(data))
-    .then(() => updateBookingsData()
-      .then(() => userOrManager().updateUserBookings(bookingsData))
-      .then(() => domMethods.getCustomerData(userOrManager(), roomsData)))
+    .then(() => refreshCustomerBookings())
+    // updateBookingsData()
+    //   .then(() => userOrManager().updateUserBookings(bookingsData))
+    //   .then(() => domMethods.getCustomerData(userOrManager(), roomsData)))
     .catch((error) => console.log(error));
   }
 }
@@ -186,9 +191,10 @@ const makeBooking = (event) => {
     let roomNumber = Number(event.target.closest('article').children[1].children[3].innerText);
     let bookingDetails = userOrManager().bookRoom(date, roomNumber);
     postBooking(bookingDetails)
-    .then(() => updateBookingsData()
-      .then(() => userOrManager().updateUserBookings(bookingsData))
-      .then(() => domMethods.getCustomerData(userOrManager(), roomsData)))
+    .then(() => refreshCustomerBookings())
+    // updateBookingsData()
+    //   .then(() => userOrManager().updateUserBookings(bookingsData))
+    //   .then(() => domMethods.getCustomerData(userOrManager(), roomsData)))
     .catch((error) => console.log(error));
   }
 }
