@@ -4,7 +4,7 @@ import Manager from '../src/classes/Manager'
 import BookingRepo from '../src/classes/Booking-Repo';
 import { bookingsData, roomsData, userData } from './test-data';
 
-describe.only('BookingRepo', () => {
+describe('BookingRepo', () => {
   let manager;
   let users;
   let bookings;

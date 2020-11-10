@@ -171,8 +171,4 @@ export const domMethods = {
     backButton.classList.remove('hide');
     this.getCustomerData(manager, roomsData);
   }
-
-
-
-
 }

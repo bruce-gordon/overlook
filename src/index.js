@@ -65,7 +65,6 @@ const updateUserData = () => {
   return getUsers()
   .then((data) => {
     userData = data.users;
-    console.log(userData);
   })
   .catch(error => console.log(error));
 }
@@ -74,7 +73,6 @@ const updateRoomsData = () => {
   return getRooms()
   .then((data) => {
     roomsData = data.rooms;
-    console.log(roomsData);
   })
   .catch(error => console.log(error));
 }
@@ -83,7 +81,6 @@ const updateBookingsData = () => {
   return getBookings()
   .then((data) => {
     bookingsData = data.bookings;
-    console.log(bookingsData);
   })
   .catch(error => console.log(error));
 }
@@ -116,7 +113,7 @@ customerBookings.addEventListener("click", () => {
   cancelBooking(event);
 })
 
-// ----------Functions----------
+// ----------Login Functions----------
 const login = (name, pWord) => {
   bookingRepo = new BookingRepo(bookingsData, roomsData);
   checkManagerPassword(name, pWord);
@@ -150,7 +147,7 @@ const checkCustomerPassword = (userId, allIds, pWord) => {
   }
 }
 
-// ----------Post Data----------
+// ----------POST and DELETE Data----------
 const userOrManager = () => {
   if (user) {
     return user;
@@ -176,11 +173,7 @@ const cancelBooking = (event) => {
     let bookingId = Number(event.target.closest('div').children[3].innerText);
     let input = manager.deleteBookedRoom(bookingId)
     deleteBooking(input)
-    .then((data) => console.log(data))
     .then(() => refreshCustomerBookings())
-    // updateBookingsData()
-    //   .then(() => userOrManager().updateUserBookings(bookingsData))
-    //   .then(() => domMethods.getCustomerData(userOrManager(), roomsData)))
     .catch((error) => console.log(error));
   }
 }
@@ -192,9 +185,6 @@ const makeBooking = (event) => {
     let bookingDetails = userOrManager().bookRoom(date, roomNumber);
     postBooking(bookingDetails)
     .then(() => refreshCustomerBookings())
-    // updateBookingsData()
-    //   .then(() => userOrManager().updateUserBookings(bookingsData))
-    //   .then(() => domMethods.getCustomerData(userOrManager(), roomsData)))
     .catch((error) => console.log(error));
   }
 }

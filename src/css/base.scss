@@ -4,7 +4,6 @@
 * {
   padding: 0px;
   margin: 0px;
-  // border: 1px solid $blue;
   border: none;
 }
 
@@ -14,36 +13,24 @@ body {
 
 // ********* HEADER ********* //
 header {
-  @include section-style(flex, auto, 7.5vw, 0px, $green);
+  @include section-style(flex, auto, 7.5vw, 0px, $green, 0 1vw 0 1vw);
   justify-content: space-between;
-  padding: 0 1vw 0 1vw;
   border-bottom: 1px solid $gray;
 }
 
 .hotel-name {
-  @include section-style(flex, auto, $header-size, 0vw, $green);
+  @include section-style(flex, auto, $header-size, 0vw, $green, 0 .5vw 0 .5vw);
   @include font($main-font, 3.8vw, 200, $primary-white)
   justify-content: center;
-  padding: 0 .5vw 0 .5vw;
-  &:hover {
-    cursor: pointer;
-    background-color: $primary-white;
-    color: $green;
-  }
 }
 
-.home-button {
+.heading {
   @include section-style(flex, auto, 80%, 0, $green)
-  border: none;
-  &:hover {
-    cursor: pointer;
-  }
 }
 
 .hotel-icon {
   @include section-style(flex, 5.4vw, $icon-size, .5vw, $green)
   @include icon-style(url(../images/hotel.svg), $green);
-
 }
 
 // ********* Welcome Bar ********* //
@@ -98,9 +85,8 @@ align-items: center;
 }
 
 .room-input {
-  @include section-style(normal, 90%, 35%, 0, normal);
+  @include section-style(normal, 90%, 35%, 0, normal, .1vw 0 .1vw .5vw);
   @include font($main-font, 1.25vw, 400, $gray);
-  padding: .1vw 0 .1vw .5vw;
 }
 
 #search-rooms-button {
@@ -119,18 +105,16 @@ align-items: center;
 }
 
 #customer-field {
-  @include section-style(flex, 20vw, 100%, 0 1vw 0 0, auto);
+  @include section-style(flex, 20vw, 100%, 0 1vw 0 0, auto, 0 0 0 1vw);
   @include font($main-font, 1.2vw, 200, $gray);
-  padding-left: 1vw;
 }
 
 #search-customers-button {
-  @include section-style(flex, 3vw, 2.9vw, 0 1vw 0 1vw, $gray);
+  @include section-style(flex, 3vw, 2.9vw, 0 1vw 0 1vw, $gray, 1vw);
   @include icon-style(url(../images/loupe.svg), $gray);
   border: none;
-  padding: 1vw;
   &:hover {
-    @include section-style(flex, 3.5vw, 3.4vw, 0 1vw 0 1vw, $gray);
+    @include section-style(flex, 3.5vw, 3.4vw, 0 1vw 0 1vw, $gray, 1vw);
   }
 }
 
@@ -141,25 +125,22 @@ align-items: center;
 }
 
 .login-box {
-  @include section-style(flex, 40%, 40%, 5vw 0 0 0, $green);
+  @include section-style(flex, 40%, 40%, 5vw 0 0 0, $green, 2vw);
   flex-direction: column;
   align-items: flex-start;
   @include font($secondary-font, 2vw, 200, $primary-white);
   border: 1px solid $gray;
-  padding: 2vw;
 }
 
 .login-input {
-  @include section-style(normal, 55%, 15%, 1vw 2vw, $primary-white);
+  @include section-style(normal, 55%, 15%, 1vw 2vw, $primary-white, 0 0 0 1vw);
   @include font($main-font, 1.25vw, normal, $gray);
-  padding-left: 1vw;
 }
 
 .login-button {
-  @include section-style(flex, 6vw, 3.5vw, 1vw 0 0 0, $gray);
+  @include section-style(flex, 6vw, 3.5vw, 1vw 0 0 0, $gray, 1vw);
   @include font($secondary-font, 1.5vw, 200, $primary-white);
   justify-content: center;
-  padding: 1vw;
   &:hover {
     @include hover($blue, $primary-white)
   }
@@ -175,16 +156,12 @@ align-items: center;
 // ********* Customer Dashboard ********* //
 .customer-dash {
   @include section-style(normal, 100%, 40vw, 0, $primary-white);
-  // flex-direction: column;
-  // justify-content: space-around;
-  padding: 0;
   overflow: auto;
 }
 
 .customer-info {
-  @include section-style(normal, 90%, auto, 1.5vw auto 1.5vw auto, $green);
+  @include section-style(normal, 90%, auto, 1.5vw auto 1.5vw auto, $green, 2vw);
   @include font($main-font, 1.75vw, 200, $primary-white);
-  padding: 2vw;
   border: 1px solid $gray;
   border-radius: 2vw;
 }
@@ -197,9 +174,6 @@ align-items: center;
   font-size: 2.25vw;
   font-weight: 400;
 }
-// #total-charges {
-//   height: 80px;
-// }
 
 // ********* Manager Dashboard ********* //
 .manager-dash {
@@ -209,9 +183,8 @@ align-items: center;
 }
 
 .manager-info {
-  @include section-style(normal, 25%, auto, 0, $green);
+  @include section-style(normal, 25%, auto, 0, $green, 3vw);
   @include font($main-font, 2.75vw, 200, $primary-white);
-  padding: 3vw;
   border-radius: 2vw;
 }
 
@@ -237,10 +210,9 @@ h4 {
 }
 
 .search-result {
-  @include section-style(flex, 95%, auto, 1vw 0, $primary-white);
+  @include section-style(flex, 95%, auto, 1vw 0, $primary-white, 1vw);
   @include font($main-font, 1.5vw, 200, $gray);
   flex-direction: column;
-  padding: 1vw;
   border-radius: 2vw;
   border: 2px solid $blue;
 }
@@ -281,6 +253,7 @@ h4 {
     @include hover($blue, $primary-white);
   }
 }
+
 // ********* Class Change ********* //
 span {
   font-weight: bold;
