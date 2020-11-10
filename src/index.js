@@ -62,7 +62,7 @@ const updateAllData = () => {
 }
 
 const updateUserData = () => {
-  getUsers()
+  return getUsers()
   .then((data) => {
     userData = data.users;
     console.log(userData);
@@ -71,7 +71,7 @@ const updateUserData = () => {
 }
 
 const updateRoomsData = () => {
-  getRooms()
+  return getRooms()
   .then((data) => {
     roomsData = data.rooms;
     console.log(roomsData);
@@ -80,10 +80,10 @@ const updateRoomsData = () => {
 }
 
 const updateBookingsData = () => {
-  getBookings()
+  return getBookings()
   .then((data) => {
     bookingsData = data.bookings;
-    console.log(bookingsData)
+    console.log("DOM BOOKING DATA", bookingsData)
   })
   .catch(error => console.log(error));
 }
@@ -106,6 +106,10 @@ searchCustomerButton.addEventListener("click", () => {
 
 backButton.addEventListener("click", () => {
   domMethods.goBack();
+})
+
+roomResultsView.addEventListener("click", () => {
+  makeBooking(event);
 })
 
 // ----------Functions----------
@@ -143,8 +147,29 @@ const checkCustomerPassword = (userId, allIds, pWord) => {
 }
 
 // ----------Post Data----------
-const makeBooking = (date, roomNumber) => {
-  let bookingDetails = user.bookRoom(date, roomNumber);
-  postBooking(bookingDetails)
-  .then((data) => console.log(data));
+const userOrManager = (date, roomNumber) => {
+  if (user) {
+    return user;
+  } else {
+    return manager;
+  }
+}
+
+const formatPostingDate = (event) => {
+  let dateClick = event.target.closest('article').children[0].children[0].innerText;
+  let parts = dateClick.split('/');
+  return parts[2] + '/' + parts[0] + '/' + parts[1];
+}
+
+const makeBooking = (event) => {
+  if (event.target.classList.contains('book-room-button')) {
+    let date = formatPostingDate(event);
+    let roomNumber = Number(event.target.closest('article').children[1].children[3].innerText);
+    let bookingDetails = userOrManager().bookRoom(date, roomNumber);
+    postBooking(bookingDetails)
+    .then(() => updateBookingsData()
+      .then(() => user.updateUserBookings(bookingsData))
+      .then(() => domMethods.getCustomerData(user, roomsData)))
+    .catch((error) => console.log(error));
+  }
 }

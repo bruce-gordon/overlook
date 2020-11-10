@@ -68,7 +68,7 @@ export const domMethods = {
       customerBookings.innerHTML +=
         `<article class="search-result">
           <div class="top-row">
-            <p class="column-left">${booking.date}</p>
+            <p class="column-left">${this.convertDate(booking.date)}</p>
             <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
             <p class="column-right">Beds:</p>
           </div>
@@ -127,9 +127,10 @@ export const domMethods = {
       this.displayRoomResults(openRooms, date);
     }
   },
+
   convertDate: function(date) {
-    let parts = date.split("/");
-    return parts[1] + "/" + parts[2] + "/" + parts[0];
+    let parts = date.split('/');
+    return parts[1] + '/' + parts[2] + '/' + parts[0];
   },
 
   displayRoomResults: function(openRooms, date) {
@@ -150,6 +151,7 @@ export const domMethods = {
           <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
           <p class="column-middle">$${room.costPerNight}</p>
           <p class="column-right">${room.numBeds} ${room.bedSize}</p>
+          <p class="room-num hide">${room.number}</p>
         </div>
       </article>`)
       })
