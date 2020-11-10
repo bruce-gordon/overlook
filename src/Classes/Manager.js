@@ -13,8 +13,7 @@ export default class Manager extends User {
     this.moneySpent = this.calculateMoneySpent(roomsData);
   }
 
-  deleteBooking(date, roomNumber) {
-    let booking = this.bookings.find(booking => booking.date === date && booking.roomNumber === roomNumber);
-    return { id: booking.id };
+  deleteBookedRoom(idNumber) {
+    return { "id": idNumber };
   }
 }

@@ -18,7 +18,7 @@ import {
   searchCustomers,
   searchCustomerInput,
   searchCustomerButton,
-  deleteBooking,
+  deleteBookingButton,
   totalRevenue,
   percentOccupied,
   roomsVacant,
@@ -77,6 +77,7 @@ export const domMethods = {
             <p class="column-left">${deleteButton}</p>
             <p class="column-middle">$${(room.costPerNight).toLocaleString('en')} per night</p>
             <p class="column-right">${room.numBeds} ${room.bedSize}</p>
+            <p class="booking-id hide">${booking.id}</p>
           </div>
         </article>`
     });
@@ -85,7 +86,7 @@ export const domMethods = {
 
   checkForManager: function(user) {
     if (user instanceof Manager) {
-      return `<button class="book-room-button" type="button" name="delete-booking-button">Delete Booking</button>`;
+      return `<button class="book-room-button delete" type="button" name="delete-booking-button">Delete Booking</button>`;
     } else {
       return '';
     }
