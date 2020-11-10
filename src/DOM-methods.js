@@ -1,5 +1,8 @@
 import {
   homeButton,
+  closeBox,
+  bookingConfirmation,
+  cancelConfirmation,
   userBar,
   welcome,
   roomSearchBar,
@@ -171,5 +174,18 @@ export const domMethods = {
     searchCustomers.classList.add("hide");
     backButton.classList.remove('hide');
     this.getCustomerData(manager, roomsData);
+  },
+
+  showConfirmation: function() {
+    if(!customerDash.classList.contains('hide')) {
+      cancelConfirmation.classList.remove('hide');
+    } else {
+      bookingConfirmation.classList.remove('hide');
+    }
+  },
+
+  closeBox:  function() {
+    bookingConfirmation.classList.add('hide');
+    cancelConfirmation.classList.add('hide');
   }
 }

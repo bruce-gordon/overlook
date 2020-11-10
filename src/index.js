@@ -8,6 +8,9 @@ import { getUsers, getRooms, getBookings, deleteBooking, postBooking } from './f
 import { domMethods } from './DOM-methods';
 import {
   homeButton,
+  closeBox,
+  bookingConfirmation,
+  cancelConfirmation,
   userBar,
   welcome,
   roomSearchBar,
@@ -114,9 +117,10 @@ customerBookings.addEventListener("click", () => {
   cancelBooking(event);
 })
 
+closeBox.addEventListener("click", domMethods.closeBox);
+
 roomTypeInput.addEventListener("click", () => {
   let open = roomTypeInput.getAttribute("aria-expanded");
-
   if (open === 'false') {
     roomTypeInput.setAttribute("aria-expanded", true);
   } else {
@@ -185,6 +189,7 @@ const cancelBooking = (event) => {
     let input = manager.deleteBookedRoom(bookingId)
     deleteBooking(input)
     .then(() => refreshCustomerBookings())
+    .then(() => domMethods.showConfirmation())
     .catch((error) => console.log(error));
   }
 }
@@ -196,6 +201,7 @@ const makeBooking = (event) => {
     let bookingDetails = userOrManager().bookRoom(date, roomNumber);
     postBooking(bookingDetails)
     .then(() => refreshCustomerBookings())
+    .then(() => domMethods.showConfirmation())
     .catch((error) => console.log(error));
   }
 }
