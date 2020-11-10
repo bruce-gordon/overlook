@@ -18,7 +18,7 @@ import {
   searchCustomers,
   searchCustomerInput,
   searchCustomerButton,
-  deleteBooking,
+  deleteBookingButton,
   totalRevenue,
   percentOccupied,
   roomsVacant,
@@ -62,46 +62,52 @@ export const domMethods = {
 
   getCustomerData: function(user, roomsData) {
     customerCharges.innerText = `$${(user.moneySpent).toLocaleString('en')}`;
+    customerBookings.innerHTML = '';
     user.bookings.forEach(booking => {
       let room = roomsData.find(roomData => roomData.number === booking.roomNumber);
-    let deleteButton = this.checkForManager(user);
-    customerBookings.innerHTML +=
-      `<article class="search-result">
-        <div class="top-row">
-          <p class="column-left">${booking.date}</p>
-          <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
-          <p class="column-right">Beds:</p>
-        </div>
-        <div class="bottom-row">
-          <p class="column-left">${deleteButton}</p>
-          <p class="column-middle">$${(room.costPerNight).toLocaleString('en')} per night</p>
-          <p class="column-right">${room.numBeds} ${room.bedSize}</p>
-        </div>
-      </article>`
+      let deleteButton = this.checkForManager(user);
+      customerBookings.innerHTML +=
+        `<article class="search-result">
+          <div class="top-row">
+            <p class="column-left">${this.convertDate(booking.date)}</p>
+            <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
+            <p class="column-right">Beds:</p>
+          </div>
+          <div class="bottom-row">
+            <p class="column-left">${deleteButton}</p>
+            <p class="column-middle">$${(room.costPerNight).toLocaleString('en')} per night</p>
+            <p class="column-right">${room.numBeds} ${room.bedSize}</p>
+            <p class="booking-id hide">${booking.id}</p>
+          </div>
+        </article>`
     });
     document.documentElement.scrollTop = 0;
   },
 
   checkForManager: function(user) {
     if (user instanceof Manager) {
-      return `<button class="book-room-button" type="button" name="delete-booking-button">Delete Booking</button>`;
+      return `<button class="book-room-button delete" type="button" name="delete-booking-button">Delete Booking</button>`;
     } else {
       return '';
     }
   },
 
-  goBack: function() {
+  goBack: function(bookingRepo, today) {
     if (customerDash.classList.contains('hide')){
       this.goToDash(roomResultsView, customerDash, roomSearchBar);
       this.isManager();
     } else {
       this.goToDash(customerDash, managerDash, searchCustomers);
-      customerBookings.innerHTML = '';
-      backButton.classList.add('hide');
-      roomSearchBar.classList.add('hide');
-      searchCustomerInput.value = '';
-      welcome.innerText = `Manager Dashboard`;
+      this.resetManagerDash(bookingRepo, today);
     }
+  },
+
+  resetManagerDash: function(bookingRepo, today) {
+    customerBookings.innerHTML = '';
+    backButton.classList.add('hide');
+    roomSearchBar.classList.add('hide');
+    searchCustomerInput.value = '';
+    this.getManagerData(bookingRepo, today)
   },
 
   isManager: function() {
@@ -123,29 +129,35 @@ export const domMethods = {
       this.displayRoomResults(openRooms, date);
     }
   },
+
   convertDate: function(date) {
-    let parts = date.split("/");
-    return parts[1] + "/" + parts[2] + "/" + parts[0];
+    let parts = date.split('/');
+    return parts[1] + '/' + parts[2] + '/' + parts[0];
   },
 
   displayRoomResults: function(openRooms, date) {
     let shownDate = this.convertDate(date);
-    roomResultsView.innerHTML = `<h4 id="results-heading">Search Results</h4>`
-    openRooms.forEach(room => {
-      roomResultsView.insertAdjacentHTML('beforeend',
-    `<article class="search-result">
-      <div class="top-row">
-        <p class="column-left">${shownDate}</p>
-        <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
-        <p class="column-right">Beds:</p>
-      </div>
-      <div class="bottom-row">
-        <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
-        <p class="column-middle">$${room.costPerNight}</p>
-        <p class="column-right">${room.numBeds} ${room.bedSize}</p>
-      </div>
-    </article>`)
-    })
+    if (!openRooms.length) {
+      roomResultsView.innerHTML = `<h4 id="results-heading">We sincerely apologize that there are no rooms available that match your search.  Please adjust your date or type of room and search again. </h4>`
+    } else {
+      roomResultsView.innerHTML = `<h4 id="results-heading">Search Results</h4>`
+      openRooms.forEach(room => {
+        roomResultsView.insertAdjacentHTML('beforeend',
+      `<article class="search-result">
+        <div class="top-row">
+          <p class="column-left">${shownDate}</p>
+          <p class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
+          <p class="column-right">Beds:</p>
+        </div>
+        <div class="bottom-row">
+          <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
+          <p class="column-middle">$${room.costPerNight}</p>
+          <p class="column-right">${room.numBeds} ${room.bedSize}</p>
+          <p class="room-num hide">${room.number}</p>
+        </div>
+      </article>`)
+      })
+    }
     backButton.classList.remove('hide');
   },
 
@@ -159,8 +171,4 @@ export const domMethods = {
     backButton.classList.remove('hide');
     this.getCustomerData(manager, roomsData);
   }
-
-
-
-
 }

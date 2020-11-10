@@ -5,13 +5,14 @@
   margin: 0px;
 }
 
-@mixin section-style($display, $width, $height, $margin, $background) {
+@mixin section-style($display, $width, $height, $margin, $background, $padding: initial) {
   display: $display;
   align-items: center;
   width: $width;
   height: $height;
   margin: $margin;
   background-color: $background;
+  padding: $padding;
 }
 
 @mixin font($font, $size, $weight, $color) {

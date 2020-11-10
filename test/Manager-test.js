@@ -47,8 +47,7 @@ describe('Manager', () => {
   })
 
   it('should be able to delete a user booking', () => {
-    manager.selectUser("Rocio Schuster", users, bookings, rooms);
-    expect(manager.deleteBooking("2020/02/16", 7)).to.deep.equal({ id: "5fwrgu4i7k55hl6t7" })
+    expect(manager.deleteBookedRoom(5398475029)).to.deep.equal({ "id": 5398475029 })
   })
 
   it('should be able to see total money spent by a user', () => {

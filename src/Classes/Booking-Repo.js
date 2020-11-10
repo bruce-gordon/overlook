@@ -15,14 +15,23 @@ export default class BookingRepo {
   }
 
   findOccupiedRoomsPercent(date) {
-    let occupied = this.findBookingsByDate(date);
-    let percent = (occupied.length / this.rooms.length).toFixed(2);
+    let percent;
+    if (this.findBookingsByDate(date).length > this.rooms.length) {
+      percent = 1;
+    } else {
+      percent = (this.findBookingsByDate(date).length / this.rooms.length).toFixed(2);
+    }
     return `${(percent * 100)}%`
   }
 
   findNumberOfAvailableRooms(date) {
-    let occupied = this.findBookingsByDate(date);
-    return this.rooms.length - occupied.length;
+    let occupied;
+    if (this.findBookingsByDate(date).length > this.rooms.length) {
+      occupied = this.rooms.length;
+    } else {
+      occupied = this.findBookingsByDate(date).length
+    }
+    return this.rooms.length - occupied;
   }
 
   addRates(rates) {

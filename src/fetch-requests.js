@@ -1,5 +1,3 @@
-
-
 export const getUsers = () => {
   return fetch(
     "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
@@ -18,8 +16,20 @@ export const getBookings = () => {
     .then((resp) => resp.json());
 }
 
+export const deleteBooking = (bookingId) => {
+  return fetch(
+    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookingId),
+    })
+    .then((resp) => resp.json());
+}
+
 export const postBooking = (bookingDetails) => {
-  fetch(
+  return fetch(
     "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
       method: "POST",
       headers: {

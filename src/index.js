@@ -4,7 +4,7 @@ import User from '../src/Classes/User';
 import Manager from '../src/Classes/Manager';
 import BookingRepo from '../src/Classes/Booking-Repo';
 
-import { getUsers, getRooms, getBookings, postBooking } from './fetch-requests';
+import { getUsers, getRooms, getBookings, deleteBooking, postBooking } from './fetch-requests';
 import { domMethods } from './DOM-methods';
 import {
   homeButton,
@@ -26,7 +26,7 @@ import {
   searchCustomers,
   searchCustomerInput,
   searchCustomerButton,
-  deleteBooking,
+  deleteBookingButton,
   totalRevenue,
   percentOccupied,
   roomsVacant,
@@ -62,28 +62,25 @@ const updateAllData = () => {
 }
 
 const updateUserData = () => {
-  getUsers()
+  return getUsers()
   .then((data) => {
     userData = data.users;
-    console.log(userData);
   })
   .catch(error => console.log(error));
 }
 
 const updateRoomsData = () => {
-  getRooms()
+  return getRooms()
   .then((data) => {
     roomsData = data.rooms;
-    console.log(roomsData);
   })
   .catch(error => console.log(error));
 }
 
 const updateBookingsData = () => {
-  getBookings()
+  return getBookings()
   .then((data) => {
     bookingsData = data.bookings;
-    console.log(bookingsData)
   })
   .catch(error => console.log(error));
 }
@@ -105,10 +102,18 @@ searchCustomerButton.addEventListener("click", () => {
 })
 
 backButton.addEventListener("click", () => {
-  domMethods.goBack();
+  domMethods.goBack(bookingRepo, today);
 })
 
-// ----------Functions----------
+roomResultsView.addEventListener("click", () => {
+  makeBooking(event);
+})
+
+customerBookings.addEventListener("click", () => {
+  cancelBooking(event);
+})
+
+// ----------Login Functions----------
 const login = (name, pWord) => {
   bookingRepo = new BookingRepo(bookingsData, roomsData);
   checkManagerPassword(name, pWord);
@@ -124,7 +129,7 @@ const checkManagerPassword = (name, pWord) => {
     if (pWord === 'overlook2020') {
       manager = new Manager({"id": null, "name": null}, bookingsData, roomsData);
       domMethods.showManagerDash();
-      domMethods.getManagerData(bookingRepo, "2020/01/24");
+      domMethods.getManagerData(bookingRepo, today);
     } else {
       domMethods.showLoginError();
     }
@@ -142,9 +147,44 @@ const checkCustomerPassword = (userId, allIds, pWord) => {
   }
 }
 
-// ----------Post Data----------
-const makeBooking = (date, roomNumber) => {
-  let bookingDetails = user.bookRoom(date, roomNumber);
-  postBooking(bookingDetails)
-  .then((data) => console.log(data));
+// ----------POST and DELETE Data----------
+const userOrManager = () => {
+  if (user) {
+    return user;
+  } else {
+    return manager;
+  }
+}
+
+const formatPostingDate = (event) => {
+  let dateClick = event.target.closest('article').children[0].children[0].innerText;
+  let parts = dateClick.split('/');
+  return parts[2] + '/' + parts[0] + '/' + parts[1];
+}
+
+const refreshCustomerBookings = () => {
+  updateBookingsData()
+    .then(() => userOrManager().updateUserBookings(bookingsData))
+    .then(() => domMethods.getCustomerData(userOrManager(), roomsData))
+}
+
+const cancelBooking = (event) => {
+  if (event.target.classList.contains('delete')) {
+    let bookingId = Number(event.target.closest('div').children[3].innerText);
+    let input = manager.deleteBookedRoom(bookingId)
+    deleteBooking(input)
+    .then(() => refreshCustomerBookings())
+    .catch((error) => console.log(error));
+  }
+}
+
+const makeBooking = (event) => {
+  if (event.target.classList.contains('book-room-button')) {
+    let date = formatPostingDate(event);
+    let roomNumber = Number(event.target.closest('article').children[1].children[3].innerText);
+    let bookingDetails = userOrManager().bookRoom(date, roomNumber);
+    postBooking(bookingDetails)
+    .then(() => refreshCustomerBookings())
+    .catch((error) => console.log(error));
+  }
 }
