@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import User from '../src/classes/User';
+import chai from 'chai';
+const expect = chai.expect;
 import Manager from '../src/classes/Manager'
 import { bookingsData, roomsData, userData } from './test-data';
 
@@ -11,14 +11,14 @@ describe('Manager', () => {
 
   beforeEach(() => {
     manager = new Manager({"id": null, "name": null}, bookingsData, roomsData);
-  })
     users = userData;
     bookings = bookingsData;
     rooms = roomsData;
+  })
 
   it('should be a function', () => {
     expect(Manager).to.be.a('function');
-  });
+  })
 
   it('should be an instance of Manager', () => {
     expect(manager).to.be.an.instanceof(Manager);

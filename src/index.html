@@ -4,29 +4,30 @@
     <title>Overlook Hotel</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <header>
-      <div class="heading" type="button" name="button">
+      <div class="heading">
         <div class="hotel-icon">
         </div>
-        <h1 class="hotel-name">The Overlook</h1>
+        <h1 tabindex="0" class="hotel-name">The Overlook</h1>
       </div>
     </header>
     <main>
       <nav class="user-bar hide">
         <div class="welcome-and-back">
-          <h2 id="welcome">Welcome, User</h2>
-          <button class="back-button hide" type="button" name="go-back"></button>
+          <h2 tabindex="0" id="welcome">Welcome, User</h2>
+          <button class="back-button hide" type="button" name="go-back" aria-label="Go back to previous view"></button>
         </div>
-        <div class="search-customers hide">
-          <input id="customer-field" type="text" placeholder="Search for customers by name" onfocus="this.placeholder=''">
-          <button id="search-customers-button" type="button" name="search-customer"></button>
+        <div role="search" class="search-customers hide">
+          <input id="customer-field" type="text" placeholder="Search for customers by name" onfocus="this.placeholder=''" aria-label="Search for hotel customers">
+          <button id="search-customers-button" type="button" name="search-customer" aria-label="Click to search for customer"></button>
         </div>
         <div class="room-search hide">
           <div class="room-type-inputs">
-            <label class="room-input-label" for="room-type-dropdown">Select Room</label>
-            <select class="room-input" name="rooms" id="rooms">
+            <label tabindex="0" class="room-input-label" for="rooms">Select Room</label>
+            <select aria-expanded="false" role="search" class="room-input" name="rooms" id="rooms">
               <option value=""></option>
               <option value="residential suite">Residential Suite</option>
               <option value="suite">Suite</option>
@@ -35,48 +36,55 @@
             </select>
           </div>
           <div class="date-selector">
-            <label class="room-input-label" for="date-input">Select Date</label>
+            <label tabindex="0"class="room-input-label" for="date-input">Select Date</label>
             <input class="room-input" id="date-input" type="date" name="date" value="">
           </div>
-          <button id="search-rooms-button" type="button" name="search-rooms">Search Rooms</button>
+          <button id="search-rooms-button" type="button" name="search-rooms" aria-label="Click to search for available rooms">Search Rooms</button>
         </div>
       </nav>
+      <article class="booking-confirmation hide">
+        <button class="close-box" type="button" name="close"></button>
+        <p>You have successfully booked this room!</p>
+      </article>
+      <article class="cancel-confirmation hide">
+        <button class="close-box cancel-close-box" type="button" name="close"></button>
+        <p>You have successfully deleted this reservation!</p>
+      </article>
       <section class="login-view">
         <article class="login-box">
-          <label for="username">User Name</label>
+          <label tabindex="0" for="username-input">User Name</label>
           <input class="login-input" id="username-input" type="text" name="username">
-          <label for="password">Password</label>
+          <label tabindex="0" for="password-input">Password</label>
           <input class="login-input" id="password-input"type="password" name="password">
           <button class="login-button" type="button" name="login">Log In</button>
         </article>
-        <p class="login-error hide">Username or Password is incorrect.  Please try again.  Username and Password are both case sensitive.</p>
+        <p tabindex="0" class="login-error hide">Username or Password is incorrect.  Please try again.  Username and Password are both case sensitive.</p>
       </section>
       <section class="customer-dash hide">
         <div class="customer-info" id="total-charges">
-          <h3 class="customer-dash-h3">Total charges:</h3>
-          <p class="customer-charges">73</p>
+          <h3 tabindex="0" class="customer-dash-h3">Total charges:</h3>
+          <p tabindex="0" class="customer-charges" aria-label="Total amount customer has spent on hotel rooms">X</p>
         </div>
         <div class="customer-info" id="customer-bookings">
-          <h3 class="customer-dash-h3">Your hotel bookings:</h3>
+          <h3 tabindex="0" class="customer-dash-h3">Your hotel bookings:</h3>
         </div>
       </section>
       <section class="manager-dash hide">
         <div class="manager-info">
-          <p>Total Revenue Today:</p>
-          <p class="manager-data" id="total-revenue">X</p>
+          <p tabindex="0">Total Revenue Today:</p>
+          <p tabindex="0"class="manager-data" id="total-revenue" aria-label="Total amount of hotel revenue today">X</p>
         </div>
         <div class="manager-info">
-          <p>Percent of Rooms Occupied Today:</p>
-          <p class="manager-data" id="percent-occupied">X</p>
+          <p tabindex="0">Percent of Rooms Occupied Today:</p>
+          <p tabindex="0" class="manager-data" id="percent-occupied" aria-label="The percent of rooms occupied today">X</p>
         </div>
         <div class="manager-info">
-          <p>Vacant Rooms Today:</p>
-          <p class="manager-data" id=rooms-vacant>X</p>
+          <p tabindex="0">Vacant Rooms Today:</p>
+          <p tabindex="0" class="manager-data" id=rooms-vacant aria-label="The number of rooms available today">X</p>
         </div>
       </section>
-      <section class="room-results-view hide">
+      <section class="room-results-view hide" aria-label="List of search results for available rooms">
       </section>
     </main>
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>

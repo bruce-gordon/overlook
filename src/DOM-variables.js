@@ -1,4 +1,7 @@
-export const homeButton = document.querySelector(".home-button");
+export const closeBox = document.querySelector(".close-box")
+export const cancelCloseBox = document.querySelector(".cancel-close-box")
+export const bookingConfirmation = document.querySelector(".booking-confirmation")
+export const cancelConfirmation = document.querySelector(".cancel-confirmation")
 
 export const userBar = document.querySelector(".user-bar");
 export const welcome = document.querySelector("#welcome");

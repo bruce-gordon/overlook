@@ -7,7 +7,10 @@ import BookingRepo from '../src/Classes/Booking-Repo';
 import { getUsers, getRooms, getBookings, deleteBooking, postBooking } from './fetch-requests';
 import { domMethods } from './DOM-methods';
 import {
-  homeButton,
+  closeBox,
+  cancelCloseBox,
+  bookingConfirmation,
+  cancelConfirmation,
   userBar,
   welcome,
   roomSearchBar,
@@ -63,26 +66,26 @@ const updateAllData = () => {
 
 const updateUserData = () => {
   return getUsers()
-  .then((data) => {
-    userData = data.users;
-  })
-  .catch(error => console.log(error));
+    .then((data) => {
+      userData = data.users;
+    })
+    .catch(error => console.log(error));
 }
 
 const updateRoomsData = () => {
   return getRooms()
-  .then((data) => {
-    roomsData = data.rooms;
-  })
-  .catch(error => console.log(error));
+    .then((data) => {
+      roomsData = data.rooms;
+    })
+    .catch(error => console.log(error));
 }
 
 const updateBookingsData = () => {
   return getBookings()
-  .then((data) => {
-    bookingsData = data.bookings;
-  })
-  .catch(error => console.log(error));
+    .then((data) => {
+      bookingsData = data.bookings;
+    })
+    .catch(error => console.log(error));
 }
 
 updateAllData();
@@ -91,6 +94,12 @@ updateAllData();
 // ----------Event Listeners----------
 loginButton.addEventListener("click", () => {
   login(userName.value, password.value);
+})
+
+password.addEventListener("keypress", () => {
+  if (event.which === 13) {
+    login(userName.value, password.value);
+  }
 })
 
 searchRoomsButton.addEventListener("click", () => {
@@ -111,6 +120,19 @@ roomResultsView.addEventListener("click", () => {
 
 customerBookings.addEventListener("click", () => {
   cancelBooking(event);
+})
+
+closeBox.addEventListener("click", domMethods.hideBox);
+
+cancelCloseBox.addEventListener("click", domMethods.hideBox);
+
+roomTypeInput.addEventListener("click", () => {
+  let open = roomTypeInput.getAttribute("aria-expanded");
+  if (open === 'false') {
+    roomTypeInput.setAttribute("aria-expanded", true);
+  } else {
+    roomTypeInput.setAttribute("aria-expanded", false);
+  }
 })
 
 // ----------Login Functions----------
@@ -173,8 +195,9 @@ const cancelBooking = (event) => {
     let bookingId = Number(event.target.closest('div').children[3].innerText);
     let input = manager.deleteBookedRoom(bookingId)
     deleteBooking(input)
-    .then(() => refreshCustomerBookings())
-    .catch((error) => console.log(error));
+      .then(() => refreshCustomerBookings())
+      .then(() => domMethods.showConfirmation())
+      .catch((error) => console.log(error));
   }
 }
 
@@ -184,7 +207,8 @@ const makeBooking = (event) => {
     let roomNumber = Number(event.target.closest('article').children[1].children[3].innerText);
     let bookingDetails = userOrManager().bookRoom(date, roomNumber);
     postBooking(bookingDetails)
-    .then(() => refreshCustomerBookings())
-    .catch((error) => console.log(error));
+      .then(() => refreshCustomerBookings())
+      .then(() => domMethods.showConfirmation())
+      .catch((error) => console.log(error));
   }
 }
