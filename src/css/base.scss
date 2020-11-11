@@ -58,7 +58,7 @@ align-items: center;
 
 .back-button {
   @include icon-style(url(../images/left-arrow-in-circular-button-black-symbol.svg), $gray);
-  @include section-style(flex, 6.9vh, 7vh, 0px, $gray);
+  @include section-style(flex, 4.5vw, 4.5vw, 0px, $gray);
   &:hover {
     @include icon-style(url(../images/left-arrow-in-circular-button-blue-symbol.svg), normal)
   }
@@ -279,6 +279,46 @@ h4 {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+// ********* Media queries ********* //
+@media screen and (max-width: 800px) {
+  .login-box {
+    @include section-style(flex, 60%, 60%, 5vw 0 0 0, $green, 2vw);
+    flex-direction: column;
+    align-items: flex-start;
+    @include font($secondary-font, 2vw, 200, $primary-white);
+    border: 1px solid $gray;
+  }
+
+  .manager-dash {
+    @include section-style(flex, 100%, 75vw, .5vw 0, $primary-white);
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .manager-info {
+    @include section-style(normal, 40%, auto, 0, $green, 3vw);
+    @include font($main-font, 3.5vw, 200, $primary-white);
+    border-radius: 2vw;
+  }
+
+  .manager-data {
+    @include font($main-font, 4vw, 400, $primary-white);
+    @include section-style(normal, auto, auto, .75vw 0 0 0, $blue);
+    text-align: center;
+    border: 2px solid $gray;
+  }
+
+  .customer-dash {
+    @include section-style(normal, 100%, 100%, 0, $primary-white);
+    overflow: auto;
+  }
+}
+
+
+
+
 
 // ********* Class Change ********* //
 span {
