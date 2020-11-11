@@ -19,9 +19,9 @@ export default class BookingRepo {
     if (this.findBookingsByDate(date).length > this.rooms.length) {
       percent = 1;
     } else {
-      percent = (this.findBookingsByDate(date).length / this.rooms.length).toFixed(2);
+      percent = (this.findBookingsByDate(date).length / this.rooms.length);
     }
-    return `${(percent * 100)}%`
+    return `${(percent * 100).toFixed(0)}%`
   }
 
   findNumberOfAvailableRooms(date) {
