@@ -1,5 +1,6 @@
 import {
   closeBox,
+  cancelCloseBox,
   bookingConfirmation,
   cancelConfirmation,
   userBar,
@@ -182,7 +183,7 @@ export const domMethods = {
     }
   },
 
-  closeBox: function() {
+  hideBox: function() {
     bookingConfirmation.classList.add('hide');
     cancelConfirmation.classList.add('hide');
   }

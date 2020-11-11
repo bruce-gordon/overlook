@@ -8,6 +8,7 @@ import { getUsers, getRooms, getBookings, deleteBooking, postBooking } from './f
 import { domMethods } from './DOM-methods';
 import {
   closeBox,
+  cancelCloseBox,
   bookingConfirmation,
   cancelConfirmation,
   userBar,
@@ -121,7 +122,9 @@ customerBookings.addEventListener("click", () => {
   cancelBooking(event);
 })
 
-closeBox.addEventListener("click", domMethods.closeBox);
+closeBox.addEventListener("click", domMethods.hideBox);
+
+cancelCloseBox.addEventListener("click", domMethods.hideBox);
 
 roomTypeInput.addEventListener("click", () => {
   let open = roomTypeInput.getAttribute("aria-expanded");
