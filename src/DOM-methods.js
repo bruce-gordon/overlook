@@ -66,7 +66,6 @@ export const domMethods = {
   getCustomerData: function(user, roomsData) {
     customerCharges.innerText = `$${(user.moneySpent).toLocaleString('en')}`;
     customerBookings.innerHTML = '';
-    console.log(user.bookings)
     user.bookings.forEach(booking => {
       let room = roomsData.find(roomData => roomData.number === Number(booking.roomNumber));
       let deleteButton = this.checkForManager(user);

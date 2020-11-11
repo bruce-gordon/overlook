@@ -55,7 +55,6 @@ const findToday = () => {
 }
 
 let today = findToday();
-console.log(today);
 
 // ----------Get Data----------
 const updateAllData = () => {
