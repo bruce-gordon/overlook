@@ -1,4 +1,5 @@
-import { expect } from 'chai';
+import chai from 'chai';
+const expect = chai.expect;
 import User from '../src/classes/User';
 import { bookingsData, roomsData } from './test-data';
 
@@ -27,7 +28,7 @@ describe('User', () => {
 
   it('should store a list of user bookings', () => {
     expect(user.bookings.length).to.equal(3);
-    expect(user.bookings[0]).to.deep.equal({"id":"5fwrgu4i7k55hl6t6","userID":1,"date":"2020/01/10","roomNumber":8,"roomServiceCharges":[]})
+    expect(user.bookings[0]).to.deep.equal({"id": "5fwrgu4i7k55hl6t6", "userID": 1, "date": "2020/01/10", "roomNumber": 8, "roomServiceCharges": []})
   })
 
   it('should store the total amount owed by the user', () => {

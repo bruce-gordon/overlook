@@ -1,5 +1,4 @@
 import {
-  homeButton,
   closeBox,
   bookingConfirmation,
   cancelConfirmation,
@@ -48,10 +47,11 @@ export const domMethods = {
     bar.classList.remove("hide");
     hide.classList.add("hide");
     userBar.classList.remove("hide");
+    document.documentElement.scrollTop = 0;
   },
 
   showLoginError: function() {
-    password.value ="";
+    password.value = "";
     loginError.classList.remove("hide");
   },
 
@@ -97,7 +97,7 @@ export const domMethods = {
   },
 
   goBack: function(bookingRepo, today) {
-    if (customerDash.classList.contains('hide')){
+    if (customerDash.classList.contains('hide')) {
       this.goToDash(roomResultsView, customerDash, roomSearchBar);
       this.isManager();
     } else {
@@ -115,9 +115,7 @@ export const domMethods = {
   },
 
   isManager: function() {
-    if (welcome.innerText.includes('Manager Dashboard - Customer')) {
-
-    } else {
+    if (!welcome.innerText.includes('Manager Dashboard - Customer')) {
       backButton.classList.add('hide');
     }
   },
@@ -132,6 +130,7 @@ export const domMethods = {
       let openRooms = bookingRepo.searchAvailableRoomsByDate(date, type);
       this.displayRoomResults(openRooms, date);
     }
+    document.documentElement.scrollTop = 0;
   },
 
   convertDate: function(date) {
@@ -147,19 +146,19 @@ export const domMethods = {
       roomResultsView.innerHTML = `<h4 id="results-heading">Search Results</h4>`
       openRooms.forEach(room => {
         roomResultsView.insertAdjacentHTML('beforeend',
-      `<article class="search-result">
-        <div class="top-row">
-          <p tabindex="0" class="column-left">${shownDate}</p>
-          <p tabindex="0" class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
-          <p tabindex="0" class="column-right">Beds:</p>
-        </div>
-        <div class="bottom-row">
-          <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
-          <p tabindex="0" class="column-middle">$${room.costPerNight}</p>
-          <p tabindex="0" class="column-right">${room.numBeds} ${room.bedSize}</p>
-          <p class="room-num hide">${room.number}</p>
-        </div>
-      </article>`)
+          `<article class="search-result">
+            <div class="top-row">
+              <p tabindex="0" class="column-left">${shownDate}</p>
+              <p tabindex="0" class="column-middle">${room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
+              <p tabindex="0" class="column-right">Beds:</p>
+            </div>
+            <div class="bottom-row">
+              <p class="column-left"><button class="book-room-button" type="button" name="book-room">Reserve Room</button></p>
+              <p tabindex="0" class="column-middle">$${room.costPerNight}</p>
+              <p tabindex="0" class="column-right">${room.numBeds} ${room.bedSize}</p>
+              <p class="room-num hide">${room.number}</p>
+            </div>
+          </article>`)
       })
     }
     backButton.classList.remove('hide');
@@ -177,14 +176,14 @@ export const domMethods = {
   },
 
   showConfirmation: function() {
-    if(!customerDash.classList.contains('hide')) {
+    if (!customerDash.classList.contains('hide')) {
       cancelConfirmation.classList.remove('hide');
     } else {
       bookingConfirmation.classList.remove('hide');
     }
   },
 
-  closeBox:  function() {
+  closeBox: function() {
     bookingConfirmation.classList.add('hide');
     cancelConfirmation.classList.add('hide');
   }

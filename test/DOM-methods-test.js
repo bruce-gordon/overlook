@@ -1,10 +1,10 @@
-import chai, { expect } from 'chai';
+import chai from 'chai';
+const expect = chai.expect;
 import spies from 'chai-spies';
 chai.use(spies);
-import domMethods from '../src/DOM-methods';
-import { loginError } from '../src/DOM-variables';
+// import domMethods from '../src/DOM-methods';
 
-describe('showManagerDash', () => {
+describe('domMethods', () => {
 
   before(function() {
     global.domMethods = {}
@@ -13,8 +13,7 @@ describe('showManagerDash', () => {
 
 
   it('should convert the date', () => {
-    domMethods.conertDate();
-
-    expect(date.split()).to.have.been.called(1);
+    // domMethods.conertDate();
+    // expect(date.split()).to.have.been.called(1);
   })
 })
